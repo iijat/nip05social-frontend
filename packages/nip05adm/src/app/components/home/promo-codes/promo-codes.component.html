@@ -1,0 +1,92 @@
+<span *ngIf="loading; else notLoading">Loading</span>
+
+<ng-template #notLoading>
+  <mtx-split direction="vertical">
+    <mtx-split-pane [size]="40">
+      <div class="flex-column gap-small">
+        <div class="flex-row gap-small align-items-center">
+          <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Sats</mat-label>
+            <input
+              type="number"
+              matInput
+              [(ngModel)]="newPromoCode.sats"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Days Valid</mat-label>
+            <input
+              type="number"
+              matInput
+              [(ngModel)]="newPromoCode.validityInDays"
+              required
+            />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>Info</mat-label>
+          <input type="text" matInput [(ngModel)]="newPromoCode.info" />
+        </mat-form-field>
+
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>Pubkey</mat-label>
+          <input type="text" matInput [(ngModel)]="newPromoCode.pubkey" />
+        </mat-form-field>
+
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="createPromoCode()"
+          class="align-self-start"
+        >
+          Create
+        </button>
+      </div>
+    </mtx-split-pane>
+
+    <mtx-split-pane [size]="60">
+      <div>
+        <table class="common-table promo-code-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Code</th>
+              <th>Sats</th>
+              <th>Valid Until</th>
+              <th>Created At</th>
+              <th>Pubkey</th>
+              <th>Info</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (promoCode of promoCodes; track promoCode.id) {
+            <tr
+              (click)="onClickRow(promoCode)"
+              [class.active]="selectedPromoCode === promoCode"
+            >
+              <td style="width: auto">
+                <button
+                  mat-flat-button
+                  color="warn"
+                  (click)="onDeletePromoCode(promoCode)"
+                >
+                  Delete
+                </button>
+              </td>
+              <td>{{ promoCode.code }}</td>
+              <td>{{ promoCode.sats }}</td>
+              <td>{{ promoCode.validUntil | date : 'MMM d, y - HH:mm' }}</td>
+              <td>{{ promoCode.createdAt | date : 'MMM d, y - HH:mm' }}</td>
+              <td>{{ promoCode.pubkey }}</td>
+              <td>{{ promoCode.info }}</td>
+            </tr>
+            } @empty { No promo codes available. }
+          </tbody>
+        </table>
+      </div>
+    </mtx-split-pane>
+  </mtx-split>
+</ng-template>

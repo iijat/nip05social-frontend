@@ -1,0 +1,14 @@
+<span *ngIf="loading; else notLoading">Loading</span>
+
+<ng-template #notLoading>
+  <div class="flex-column">
+    <a routerLink="bot" routerLinkActive="active"> Bot </a>
+    <a routerLink="public-relays" routerLinkActive="active"> Public Relays </a>
+    <a routerLink="account-dm" routerLinkActive="active"> Account DM </a>
+    <a routerLink="promo-codes" routerLinkActive="active"> Promo Codes </a>
+  </div>
+
+  <div style="height: 100%; overflow-y: hidden">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>

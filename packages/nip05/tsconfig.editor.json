@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "../shared/src/**/*.ts",
+    "src/**/*.ts",
+    "../shared/src/lib/graphql/output/user-output.ts",
+    "../shared/src/lib/graphql/output/user-subscription-invoice-output.ts",
+    "../shared/src/lib/graphql/output/user-subscription-invoice-payment-output.ts",
+    "../shared/src/lib/graphql/output/user-subscription-output.ts",
+    "../shared/src/lib/graphql/output/user-token-output.ts",
+    "../shared/src/lib/graphql/output/websocket-eot-output.ts",
+    "../shared/src/lib/graphql/output/login-job-update-output.ts",
+    "../shared/src/lib/graphql/output/identifier-register-check-output.ts",
+    "../shared/src/lib/graphql/output/nostr-event-output.ts",
+    "../shared/src/lib/graphql/output/registration-code-output.ts",
+    "../shared/src/lib/graphql/output/registration-output.ts",
+    "../shared/src/lib/graphql/output/registration-relay-output.ts",
+    "../shared/src/lib/graphql/output/createRegistrationNip07CodeOutput.ts",
+    "../shared/src/lib/graphql/output/createRegistrationNip46CodeOutput.ts",
+    "../shared/src/lib/graphql/output/directory-registration-output.ts",
+    "../shared/src/lib/graphql/output/stat-output.ts",
+    "../shared/src/lib/graphql/output/subscription-calc-output.ts",
+    "../shared/src/lib/graphql/output/subscription-output.ts",
+    "../shared/src/lib/graphql/output/system-domain-output.ts",
+    "../shared/src/lib/graphql/output/system-relay-output.ts"
+  ],
+  "compilerOptions": {
+    "types": ["jest", "node"]
+  }
+}

@@ -1,0 +1,61 @@
+@use '@angular/material' as mat;
+@use '@ng-matero/extensions' as mtx;
+@include mat.core();
+
+@import '../../shared/src/lib/styles/shared-style.scss';
+
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($theme);
+@include mtx.all-component-themes($theme);
+
+html,
+body {
+  color: #1c1d2f;
+  background-color: #e7e7e7; // #ffffff;
+  //background-color: #f9fafb;
+
+  margin: 0;
+  height: 100vh;
+  width: 100ww;
+
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  height: 100%;
+  //background-color: #f29159;
+
+  overflow-y: hidden;
+}
+
+$accent-100: mat.get-color-from-palette($accent, 100);
+$accent-200: mat.get-color-from-palette($accent, 200);
+$accent-300: mat.get-color-from-palette($accent, 300);
+$accent-400: mat.get-color-from-palette($accent, 400);
+$accent-500: mat.get-color-from-palette($accent, 500);
+
+$primary-100: mat.get-color-from-palette($primary, 100);
+$primary-200: mat.get-color-from-palette($primary, 200);
+$primary-300: mat.get-color-from-palette($primary, 300);
+$primary-400: mat.get-color-from-palette($primary, 400);
+$primary-500: mat.get-color-from-palette($primary, 500);
+
+:root {
+  --accent-100: #{$accent-100};
+  --accent-200: #{$accent-200};
+  --accent-300: #{$accent-300};
+  --accent-400: #{$accent-400};
+  --accent-500: #{$accent-500};
+
+  --primary-100: #{$primary-100};
+  --primary-200: #{$primary-200};
+  --primary-300: #{$primary-300};
+  --primary-400: #{$primary-400};
+  --primary-500: #{$primary-500};
+}

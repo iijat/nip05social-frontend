@@ -1,0 +1,127 @@
+.h-toast-container {
+  z-index: 10000;
+  background-color: transparent;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  //padding: 24px;
+
+  .grid {
+    //margin: 0 24px;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+
+    .toast-item {
+      height: 100%;
+      background: #00000090;
+      pointer-events: all;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+
+      padding: 12px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .message {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px 0;
+          font-size: 3rem;
+        }
+
+        .body {
+          background: #ffffff !important;
+          color: var(--body-color-dark);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .title {
+            margin: 24px 24px 12px 24px;
+            font-weight: 500;
+            font-size: 24px;
+            text-transform: uppercase;
+          }
+
+          .message {
+            margin: 0 12px 24px 12px;
+            text-align: center;
+          }
+
+          .auto-close {
+            margin-bottom: 24px;
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+  }
+}
+
+.d-toast-container {
+  z-index: 10000;
+  background-color: transparent;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  .message {
+    padding: 12px;
+
+    border: 0px solid;
+
+    border-radius: 6px;
+    max-width: 400px;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+
+    .left {
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+    }
+  }
+}
+
+.info {
+  border-color: #81c784;
+  background-color: #c8e6c9;
+}
+
+.warning {
+  border-color: #ebcc39;
+  background-color: #ebcc39;
+}
+
+.error {
+  background-color: var(--warn-500);
+  color: #ffffff;
+}

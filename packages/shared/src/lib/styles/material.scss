@@ -1,0 +1,55 @@
+@use '@angular/material' as mat;
+
+$green-palette: (
+  50: #c0ddd8,
+  100: #9bc7bf,
+  200: #9bc7bf,
+  300: #7db1a7,
+  400: #6da095,
+  500: #658f85,
+  600: #5e8279,
+  700: #56726a,
+  800: #50625c,
+  900: #3f4643,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: rgba(black, 0.87),
+    700: rgba(black, 0.87),
+    800: rgba(black, 0.87),
+    900: rgba(black, 0.87),
+  ),
+);
+
+$orange-palette: (
+  50: #fae9e5,
+  100: #faceb8,
+  200: #f6af89,
+  300: #f29159,
+  400: #ef7b32,
+  500: #ec6800,
+  600: #e26100,
+  700: #d45a00,
+  800: #c75300,
+  900: #b04500,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: rgba(black, 0.87),
+    700: rgba(black, 0.87),
+    800: rgba(black, 0.87),
+    900: rgba(black, 0.87),
+  ),
+);
+
+$primary: mat.define-palette($green-palette);
+$accent: mat.define-palette($orange-palette);
+$warn: mat.define-palette(mat.$red-palette);

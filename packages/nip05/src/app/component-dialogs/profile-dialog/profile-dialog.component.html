@@ -1,0 +1,118 @@
+<mat-progress-bar
+  *ngIf="loading; else notLoadingElement"
+  mode="indeterminate"
+  color="accent"
+></mat-progress-bar>
+
+<ng-template #notLoadingElement>
+  <!-- ERROR -->
+  <ng-container *ngIf="errorMessage">
+    <div>{{ errorMessage }}</div>
+  </ng-container>
+
+  <!-- NO ERROR -->
+  <ng-container *ngIf="!errorMessage">
+    <div class="flex-column">
+      <div class="banner-area">
+        <img
+          class="banner"
+          [ngClass]="responsiveService.isHandset ? 'handset' : 'desktop'"
+          [src]="pubkeyNostrEventWrapper?.content?.banner || defaultBannerUrl"
+          alt="banner"
+        />
+        <div class="actions">
+          <button
+            mat-mini-fab
+            [ngClass]="
+              responsiveService.isHandset
+                ? 'mr-small mt-small'
+                : 'mr-normal mt-normal'
+            "
+            (click)="close()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="picture-area" [style.marginTop]="pictureMarginNegative">
+        <img
+          [ngClass]="
+            responsiveService.isHandset
+              ? 'ml-normal picture-handset'
+              : 'ml-large picture-desktop'
+          "
+          [height]="pictureSize"
+          [width]="pictureSize"
+          [src]="pubkeyNostrEventWrapper?.content?.picture ?? defaultPicture"
+        />
+        <div
+          *ngIf="!loading && !pubkeyNostrEventWrapper"
+          [style.marginTop]="pictureMarginPositive"
+          class="no-metadata-found"
+        >
+          No metadata found for this pubkey!
+        </div>
+      </div>
+
+      <div
+        class="mt-normal mb-normal flex-column align-items-flex-start"
+        [ngClass]="
+          responsiveService.isHandset
+            ? 'ml-normal mr-normal'
+            : 'ml-large mr-large'
+        "
+      >
+        <div *ngIf="name" class="name mb-tiny">
+          {{ name }}
+        </div>
+
+        <span
+          class="font-size-14 overflow-wrap-anywhere mb-tiny"
+          *ngIf="pubkeyNostrEventWrapper?.content?.about"
+        >
+          {{ pubkeyNostrEventWrapper?.content?.about }}
+        </span>
+
+        <app-profile-item
+          *ngIf="pubkeyObject?.npub"
+          icon="key"
+          suffix="(NPUB)"
+          [text]="npub ?? 'na'"
+          [copy2ClipboardText]="pubkeyObject?.npub"
+        >
+        </app-profile-item>
+
+        <app-profile-item
+          *ngIf="pubkeyObject?.hex"
+          icon="key"
+          suffix="(HEX)"
+          [text]="hex ?? 'na'"
+          [copy2ClipboardText]="pubkeyObject?.hex"
+        >
+        </app-profile-item>
+
+        <app-profile-item
+          *ngIf="pubkeyNostrEventWrapper?.content?.nip05"
+          icon="person"
+          [text]="pubkeyNostrEventWrapper?.content?.nip05 ?? 'na'"
+        >
+        </app-profile-item>
+
+        <app-profile-item
+          *ngIf="pubkeyNostrEventWrapper?.content?.lud16"
+          icon="bolt"
+          [text]="pubkeyNostrEventWrapper?.content?.lud16 ?? 'na'"
+        >
+        </app-profile-item>
+
+        <app-profile-item
+          *ngIf="pubkeyNostrEventWrapper?.content?.website"
+          icon="link"
+          [text]="pubkeyNostrEventWrapper?.content?.website ?? 'na'"
+        >
+        </app-profile-item>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

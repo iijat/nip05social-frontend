@@ -1,0 +1,137 @@
+<span *ngIf="loading; else notLoading">Loading ...</span>
+
+<ng-template #notLoading>
+  <div class="left-and-right">
+    <div class="left">
+      <div class="flex-row gap-normal">
+        <div class="flex-column gap-normal">
+          <mat-form-field subscriptSizing="dynamic" appearance="outline">
+            <mat-label>NIP-05</mat-label>
+            <input
+              required
+              matInput
+              type="text"
+              [autocomplete]="uuid1"
+              [(ngModel)]="botMetadata.nip05"
+            />
+          </mat-form-field>
+
+          <mat-form-field subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input
+              required
+              matInput
+              type="text"
+              [autocomplete]="uuid2"
+              [(ngModel)]="botMetadata.name"
+            />
+          </mat-form-field>
+        </div>
+        <mat-form-field
+          subscriptSizing="dynamic"
+          appearance="outline"
+          class="flex-grow-1"
+        >
+          <mat-label>About</mat-label>
+          <textarea
+            matInput
+            [autocomplete]="uuid3"
+            [(ngModel)]="botMetadata.about"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field subscriptSizing="dynamic" appearance="outline">
+        <mat-label>Picture URL</mat-label>
+        <input
+          matInput
+          type="text"
+          [autocomplete]="uuid1"
+          [(ngModel)]="botMetadata.picture"
+        />
+      </mat-form-field>
+
+      <mat-form-field subscriptSizing="dynamic" appearance="outline">
+        <mat-label>Banner URL</mat-label>
+        <input
+          matInput
+          type="text"
+          [autocomplete]="uuid1"
+          [(ngModel)]="botMetadata.banner"
+        />
+      </mat-form-field>
+
+      <div class="flex-row align-items-center gap-normal">
+        <button mat-flat-button color="primary" (click)="createBotMetadata()">
+          Create New
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!botMetadata.origin"
+          (click)="updateBotMetadata()"
+        >
+          Update Existing
+        </button>
+
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!botMetadata.origin"
+          (click)="publishBotMetadata()"
+        >
+          Publish to missing relays
+        </button>
+      </div>
+    </div>
+    <div class="right">
+      <table class="common-table">
+        <thead>
+          <tr>
+            <th>Published At</th>
+            <th>Relay</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let botMetadataRelay of botMetadata.origin?.botMetadataRelays
+            "
+          >
+            <td>
+              {{ botMetadataRelay.publishedAt | date : 'MMM d, y - HH:mm' }}
+            </td>
+            <td>{{ botMetadataRelay.url }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <table class="common-table mt-normal">
+    <thead>
+      <tr>
+        <th>Created At</th>
+        <th>NIP-05</th>
+        <th>Name</th>
+        <th>About</th>
+        <th>Picture URL</th>
+        <th>Banner URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let metadata of botMetadatas"
+        (click)="botMetadata.setOrigin(metadata)"
+        style="cursor: pointer"
+      >
+        <td>{{ metadata.createdAt | date : 'MMM d, y - HH:mm' }}</td>
+        <td>{{ metadata.nip05 }}</td>
+        <td>{{ metadata.name }}</td>
+        <td>{{ metadata.about }}</td>
+        <td>{{ metadata.picture }}</td>
+        <td>{{ metadata.banner }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>

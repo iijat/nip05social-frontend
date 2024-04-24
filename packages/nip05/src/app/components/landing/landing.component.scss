@@ -1,0 +1,53 @@
+:host {
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  height: 100%;
+}
+
+.header {
+  top: 0;
+  position: sticky;
+
+  display: flex;
+  justify-content: center;
+
+  background-color: #ffffff;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  overflow-y: hidden;
+  z-index: 1;
+
+  .handset {
+    width: 100%;
+  }
+
+  .non-handset {
+    width: 100%;
+    max-width: 1280px;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 100vw;
+
+  .handset {
+    width: 100%;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+
+  .non-handset {
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+}

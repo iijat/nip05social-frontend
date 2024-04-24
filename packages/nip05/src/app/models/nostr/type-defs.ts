@@ -1,0 +1,95 @@
+import { NostrHelperV2 } from './nostr-helper-v2';
+
+export enum NostrEventKind {
+  Metadata = 0,
+  Text = 1,
+  RecommendRelay = 2,
+  Contacts = 3,
+  EncryptedDirectMessage = 4,
+  EventDeletion = 5,
+  Reaction = 7,
+  ChannelCreation = 40,
+  ChannelMetadata = 41,
+  ChannelMessage = 42,
+  ChannelHideMessage = 43,
+  ChannelMuteUser = 44,
+}
+
+export type NostrUnsignedEvent = {
+  kind: NostrEventKind;
+  tags: string[][];
+  content: string;
+  created_at: number;
+};
+
+export type NostrEvent = {
+  id: string;
+  sig: string;
+  kind: NostrEventKind;
+  tags: string[][];
+  pubkey: string;
+  content: string;
+  created_at: number;
+};
+
+export type NostrEventKind0Content = {
+  name?: string;
+  about?: string;
+  picture?: string;
+  nip05?: string;
+  username?: string;
+  display_name?: string;
+  displayName?: string;
+  banner?: string;
+  website?: string;
+  lud16?: string; // lightning address
+};
+
+export class NostrEventWrapper<ContentType> {
+  readonly pubkey: string;
+  readonly pubkeyNpub: string;
+  protected source: NostrEvent | undefined;
+
+  get content(): ContentType | undefined {
+    return typeof this.source === 'undefined'
+      ? undefined
+      : JSON.parse(this.source.content);
+  }
+
+  constructor(pubkey: string, source: NostrEvent | undefined) {
+    this.pubkey = pubkey;
+    this.source = source;
+
+    this.pubkeyNpub = NostrHelperV2.pubkey2npub(pubkey);
+  }
+
+  update(source: NostrEvent) {
+    this.source = source;
+  }
+}
+
+export type NostrFilters = {
+  /** A list of event ids or prefixes */
+  ids?: string[];
+
+  /** A list of pubkeys or prefixes, the pubkey of an event must be one of these */
+  authors?: string[];
+
+  /** A list of a kind numbers */
+  kinds?: number[];
+
+  /** A list of event ids that are referenced in an "e" tag  */
+  '#e'?: string[];
+
+  /** A list of pubkeys that are referenced in a "p" tag  */
+  '#p'?: string[];
+
+  /** An integer unix timestamp, events must be newer than this to pass */
+  since?: number;
+
+  /** An integer unix timestamp, events must be older than this to pass */
+  until?: number;
+
+  /** Maximum number of events to be returned in the initial query */
+  limit?: number;
+};

@@ -1,0 +1,294 @@
+<span *ngIf="loading; else notLoading" class="material-icons spin mt-normal">
+  donut_large
+</span>
+
+<ng-template #notLoading>
+  <!-- ################################### -->
+  <!-- YOUR NOSTR ADDRESS SERVICE PROVIDER -->
+  <!-- ################################### -->
+  <div class="container mt-normal flex-column align-items-center">
+    <h1 style="font-size: 72px; font-weight: 600">
+      <ng-container *ngIf="responsiveService.isHandset">
+        Your Nostr Address Service Provider
+      </ng-container>
+      <ng-container *ngIf="!responsiveService.isHandset">
+        Your Nostr Address <br />
+        Service Provider
+      </ng-container>
+    </h1>
+
+    <h2 style="margin-top: -24px">
+      Register a free <strong> Nostr Address</strong> with
+      <strong> Lightning Address Forwarding</strong> <br />
+      and the option to
+      <strong> Receive and Send Emails</strong>
+      on Nostr.
+    </h2>
+
+    <div class="mt-small flex-row gap-small width-100 justify-content-center">
+      <app-button
+        color="primary"
+        link="/register"
+        [ngClass]="
+          !responsiveService.isHandset
+            ? 'desktop-button'
+            : 'mt-normal flex-grow-1'
+        "
+      >
+        REGISTER
+      </app-button>
+
+      <app-button
+        link="/login"
+        [ngClass]="
+          !responsiveService.isHandset
+            ? 'desktop-button'
+            : 'mt-normal flex-grow-1'
+        "
+        >LOGIN</app-button
+      >
+    </div>
+  </div>
+
+  <div
+    class="container mt-large main"
+    [class.desktop]="!responsiveService.isHandset"
+    [class.handset]="responsiveService.isHandset"
+  >
+    <h1>Choose from 6 Domains</h1>
+
+    <div
+      class="mb-normal align-items-center"
+      [ngClass]="
+        !responsiveService.isHandset
+          ? 'mb-normal flex-row gap-large'
+          : 'mb-normal flex-column'
+      "
+    >
+      <div class="image" style="padding: 48px">
+        <div class="domain-list">
+          <span class="body flex-row align-items-center">
+            <i class="material-icons color-accent-500">chevron_right</i>
+            <div class="color-black font-size-32">nip05.social</div>
+          </span>
+
+          <span class="body flex-row align-items-center">
+            <i class="material-icons color-accent-500">chevron_right</i>
+            <div class="color-blue font-size-24">unitednostr.com</div>
+          </span>
+
+          <span class="body flex-row align-items-center">
+            <i class="material-icons color-accent-500">chevron_right</i>
+            <div class="color-black font-size-32">nostrid.info</div>
+          </span>
+
+          <span class="body flex-row align-items-center">
+            <i class="material-icons color-accent-500">chevron_right</i>
+            <div class="color-blue font-size-24">nip05.cloud</div>
+          </span>
+
+          <span class="body flex-row align-items-center">
+            <i class="material-icons color-accent-500">chevron_right</i>
+            <div class="color-black font-size-32">nostrcom.com</div>
+          </span>
+
+          <span class="body flex-row align-items-center">
+            <i class="material-icons color-accent-500">chevron_right</i>
+            <div class="color-blue font-size-24">protonostr.com</div>
+          </span>
+        </div>
+      </div>
+
+      <div class="flex-column">
+        <h2>
+          Your address could be like <br />
+          <span class="color-accent-300">einstein&#64;nip05.social</span> or
+          <span class="color-accent-300">deathstar&#64;protonostr.com</span>.
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTNING ADDRESS -->
+  <div class="container mt-normal flex-column align-items-center">
+    <h1 style="font-size: 72px; font-weight: 600">
+      <ng-container *ngIf="responsiveService.isHandset">
+        Lightning Address Forwarding
+      </ng-container>
+      <ng-container *ngIf="!responsiveService.isHandset">
+        Lightning Address Forwarding
+      </ng-container>
+    </h1>
+
+    <h2 style="margin-top: -24px">
+      Enable your registered Nostr Address for <b>lightning payments</b>.
+    </h2>
+  </div>
+
+  <div
+    class="container main mt-small"
+    [class.desktop]="!responsiveService.isHandset"
+    [class.handset]="responsiveService.isHandset"
+  >
+    <h1>Config your LN Forwarding</h1>
+    <div
+      class="mb-normal align-items-center"
+      [ngClass]="
+        !responsiveService.isHandset ? 'flex-row gap-large' : 'flex-column'
+      "
+    >
+      <div class="flex-column align-items-center">
+        <h2 style="margin-top: 0">
+          Login to your <b> account</b> and configure a lightning address
+          endpoint.
+        </h2>
+      </div>
+
+      <img
+        style="max-width: 90%"
+        class="image"
+        src="https://nip05assets.blob.core.windows.net/public/nip05.social - lightning address config.jpg"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <!-- ################################ -->
+  <!-- RECEIVE AND SEND EMAILS ON NOSTR -->
+  <!-- ################################ -->
+  <div class="container mt-normal flex-column align-items-center">
+    <h1 style="font-size: 72px; font-weight: 600">
+      <ng-container *ngIf="responsiveService.isHandset">
+        Receive & Send Emails on Nostr
+      </ng-container>
+      <ng-container *ngIf="!responsiveService.isHandset">
+        Receive & Send <br />Emails on Nostr
+      </ng-container>
+    </h1>
+
+    <h2 style="margin-top: -24px">
+      <ng-container *ngIf="responsiveService.isHandset">
+        User your NIP05.social <b>Nostr Address as Email Address</b>. Receive
+        and send emails as <b>DMs</b> on Nostr.
+      </ng-container>
+      <ng-container *ngIf="!responsiveService.isHandset">
+        User your NIP05.social <b>Nostr Address as Email Address</b>.
+        <br />Receive and send emails as <b>DMs</b> on Nostr.
+      </ng-container>
+    </h2>
+  </div>
+
+  <div
+    class="container mt-normal main"
+    [class.desktop]="!responsiveService.isHandset"
+    [class.handset]="responsiveService.isHandset"
+  >
+    <h1>Email Mirror Accounts on Nostr</h1>
+    <h2 style="margin-top: 0px; margin-bottomm: 48px">
+      We create a Nostr account for every email address that you receive an
+      email from.
+    </h2>
+    <h2
+      style="margin-top: 0px; margin-bottom: 48px"
+      class="flex-row align-items-center gap-small"
+    >
+      <span> Use our private relay</span>
+
+      <div style="font-size: 16px">
+        <app-chip
+          color="accent"
+          text="RELAY.NIP05.SOCIAL"
+          clipboardText="wss://relay.nip05.social"
+        ></app-chip>
+      </div>
+      <span> to interact with these mirror accounts. </span>
+    </h2>
+    <div
+      [class.desktop-alignment]="!responsiveService.isHandset"
+      [class.handset-alignment]="responsiveService.isHandset"
+    >
+      <img
+        class="image"
+        src="https://nip05assets.blob.core.windows.net/public/nip05.social - email mirror account - light.jpg"
+        [style.width]="responsiveService.isHandset ? '90%' : '40%'"
+      />
+      <ng-container *ngIf="responsiveService.isHandset">
+        <h2 class="mt-large">
+          <b>Receive</b> emails as DMs <b>from</b> email mirror accounts.
+        </h2>
+        <h2><b>Send</b> emails as DMs <b>to</b> email mirror accounts.</h2>
+      </ng-container>
+
+      <ng-container *ngIf="!responsiveService.isHandset">
+        <div class="flex-column align-items-center">
+          <h2>
+            <b>Receive</b> emails as DMs <b>from</b> email mirror accounts.
+          </h2>
+          <h2><b>Send</b> emails as DMs <b>to</b> email mirror accounts.</h2>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- DESKTOP -->
+    <ng-container *ngIf="!responsiveService.isHandset">
+      <div class="mb-normal flex-row align-items-center gap-normal">
+        <div class="align-self-end flex-column align-items-center">
+          <h1>NIP05.social Email Out [Bot]</h1>
+          <h2 style="margin-top: 0px; margin-bottom: 48px">
+            No email mirror account available? Use our dedicated bot to send
+            emails.
+          </h2>
+          <app-chip
+            color="accent"
+            [text]="reducePubkey(emailOutBotPubkey) ?? 'na'"
+            [clipboardText]="emailOutBotPubkey"
+          >
+          </app-chip>
+
+          <app-chip
+            color="accent"
+            [text]="emailOutBotNip05"
+            class="mt-normal"
+          ></app-chip>
+        </div>
+
+        <img
+          class="image"
+          style="margin-top: -24px"
+          src="https://nip05assets.blob.core.windows.net/public/nip05.social - email out bot - light.jpg"
+          alt=""
+          width="40%"
+        />
+      </div>
+    </ng-container>
+
+    <!-- HANDSET -->
+    <ng-container *ngIf="responsiveService.isHandset">
+      <h1>NIP05.social Email Out [Bot]</h1>
+      <h2 style="margin-top: 0px; margin-bottom: 48px">
+        No email mirror account available? Use our dedicated bot to send emails.
+      </h2>
+      <app-chip
+        color="accent"
+        [text]="reducePubkey(emailOutBotPubkey) ?? 'na'"
+        [clipboardText]="emailOutBotPubkey"
+      >
+      </app-chip>
+
+      <app-chip
+        color="accent"
+        [text]="emailOutBotNip05"
+        class="mt-normal"
+      ></app-chip>
+
+      <img
+        class="mt-large mb-normal image"
+        src="https://nip05assets.blob.core.windows.net/public/nip05.social - email out bot - light.jpg"
+        alt=""
+        width="90%"
+      />
+    </ng-container>
+  </div>
+
+  <app-space size="large"></app-space>
+</ng-template>

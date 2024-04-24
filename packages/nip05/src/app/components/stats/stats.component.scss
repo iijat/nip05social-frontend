@@ -1,0 +1,69 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.container {
+  max-width: 1024px;
+  width: 100%;
+}
+
+.stats-area {
+  padding: 12px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  column-gap: 48px;
+
+  //width: 100%;
+
+  .stats-item {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.stats-area-desktop {
+  align-self: center;
+  overflow-x: hidden;
+}
+
+.stats-area-handset {
+  overflow-x: auto;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.stat-table {
+  width: 100%;
+  font-size: 14px;
+
+  th {
+    text-align: left;
+    font-weight: 500;
+    line-height: 32px;
+    background-color: var(--accent-300);
+    color: #ffffff;
+    padding-left: 8px;
+  }
+
+  td {
+    background-color: var(--accent-50);
+    padding-left: 8px;
+    line-height: 28px;
+  }
+
+  tr {
+    &:hover > td {
+      background-color: var(--accent-100);
+    }
+  }
+}
+
+.table-row {
+  cursor: pointer;
+}

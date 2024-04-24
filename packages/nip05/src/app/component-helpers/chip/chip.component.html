@@ -1,0 +1,7 @@
+<div class="chip-content">
+  <ng-container *ngIf="!showCopyToClipboard">
+    {{ text }}
+  </ng-container>
+
+  <ng-container *ngIf="showCopyToClipboard"> copied to clipboard </ng-container>
+</div>

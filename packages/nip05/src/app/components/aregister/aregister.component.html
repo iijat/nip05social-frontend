@@ -1,0 +1,27 @@
+<div class="container mt-large row">
+  <div [ngClass]="responsiveService.isHandset ? 'digit-h' : 'digit-d'">
+    {{ getPart(code, 0) }}
+  </div>
+
+  <div [ngClass]="responsiveService.isHandset ? 'digit-h' : 'digit-d'">
+    {{ getPart(code, 1) }}
+  </div>
+
+  <div [ngClass]="responsiveService.isHandset ? 'digit-h' : 'digit-d'">
+    {{ getPart(code, 2) }}
+  </div>
+
+  <div [ngClass]="responsiveService.isHandset ? 'digit-h' : 'digit-d'">
+    {{ getPart(code, 3) }}
+  </div>
+
+  <div [ngClass]="responsiveService.isHandset ? 'digit-h' : 'digit-d'">
+    {{ getPart(code, 4) }}
+  </div>
+
+  <div [ngClass]="responsiveService.isHandset ? 'digit-h' : 'digit-d'">
+    {{ getPart(code, 5) }}
+  </div>
+</div>
+
+<span *ngIf="activity" class="material-icons spin mt-normal">donut_large </span>

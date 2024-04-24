@@ -1,0 +1,113 @@
+<span
+  *ngIf="loading; else notLoading"
+  class="material-icons spin mt-normal mb-normal"
+  >donut_large
+</span>
+
+<ng-template #notLoading>
+  <div class="container">
+    <h1>Statistics</h1>
+  </div>
+
+  <app-card class="container">
+    <div
+      class="stats-area"
+      [ngClass]="
+        responsiveService.isHandset
+          ? 'stats-area-handset'
+          : 'stats-area-desktop'
+      "
+    >
+      <app-stats-block name="Users" [value]="usageStatistics?.noOfUsers">
+      </app-stats-block>
+
+      <app-stats-block
+        name="Registrations"
+        [value]="usageStatistics?.noOfRegistrations"
+      >
+      </app-stats-block>
+
+      <app-stats-block
+        name="Lookups today"
+        [value]="usageStatistics?.noOfLookupsToday"
+      >
+      </app-stats-block>
+
+      <app-stats-block
+        name="Lookups yesterday"
+        [value]="usageStatistics?.noOfLookupsYesterday"
+      >
+      </app-stats-block>
+    </div>
+
+    <div class="divider mt-small mb-small"></div>
+
+    <div style="height: 150px">
+      <ngx-charts-bar-horizontal
+        [results]="data"
+        [gradient]="false"
+        [xAxis]="false"
+        [yAxis]="true"
+        [legend]="false"
+        [showXAxisLabel]="false"
+        [showYAxisLabel]="false"
+        [showDataLabel]="true"
+        xAxisLabel="Registrations"
+        yAxisLabel="Domain"
+      >
+      </ngx-charts-bar-horizontal>
+    </div>
+  </app-card>
+
+  <app-card class="container mt-large">
+    <div class="title">Last 10 Registrations</div>
+    <div class="body mb-tiny">
+      Click on a row to get more information about the user.
+    </div>
+    <table class="stat-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Domain</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let registration of usageStatistics?.lastRegistrations"
+          (click)="showProfile(registration.pubkey)"
+          class="table-row"
+        >
+          <td>{{ registration.date | date : 'yyyy-MM-dd HH:mm' }}</td>
+          <td>{{ registration.identifier }}</td>
+          <td>{{ registration.domain }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </app-card>
+
+  <app-card class="container mt-large">
+    <div class="title">Top 10 Lookups Today</div>
+    <div class="body mb-tiny">
+      Click on a row to get more information about the user.
+    </div>
+    <table class="stat-table">
+      <thead>
+        <th>Lookups</th>
+        <th>Name</th>
+        <th>Domain</th>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let top of usageStatistics?.topLookupsToday"
+          (click)="showProfile(top.pubkey)"
+          class="table-row"
+        >
+          <td>{{ top.total }}</td>
+          <td>{{ top.identifier }}</td>
+          <td>{{ top.domain }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </app-card>
+</ng-template>

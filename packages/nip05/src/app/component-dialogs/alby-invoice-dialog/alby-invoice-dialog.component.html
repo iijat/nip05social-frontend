@@ -1,0 +1,52 @@
+<h2 matDialogTitle>Invoice ({{ invoiceStatus }})</h2>
+
+<mat-dialog-content>
+  <ng-container>
+    <div class="flex-column gap-small">
+      <div class="flex-row align-items-center">
+        <span>{{ data.invoice.description }}</span>
+        <div class="flex-grow-1" style="min-width: 16px"></div>
+        <div class="flex-column nowrap">
+          <h2 class="color-black font-weight-500">
+            {{ data.invoice.amount | number : '1.0-0' }} sats
+          </h2>
+        </div>
+      </div>
+
+      <span *ngIf="invoiceStatus === 'unsettled'">
+        Invoice expires at
+        {{ data.invoice.expiresAt | date : 'MMM d, y - HH:mm' }}
+      </span>
+
+      <img
+        *ngIf="invoiceStatus !== 'cancelled' && invoiceStatus !== 'paid'"
+        [src]="data.invoice.qrCodeSvg"
+        alt="Loading QR Code ..."
+      />
+      <app-chip
+        *ngIf="invoiceStatus !== 'cancelled' && invoiceStatus !== 'paid'"
+        [text]="reducePubkey(data.invoice.paymentRequest) ?? 'na'"
+        [clipboardText]="data.invoice.paymentRequest"
+        class="align-self-center"
+      ></app-chip>
+
+      <app-button
+        color="primary"
+        href="lightning:{{ data.invoice.paymentRequest }}"
+        *ngIf="invoiceStatus !== 'cancelled' && !invoiceIsPaid"
+      >
+        Open in Wallet
+      </app-button>
+
+      <app-button
+        color="warn"
+        *ngIf="invoiceStatus === 'unsettled'"
+        (click)="cancelInvoice()"
+      >
+        Cancel Invoice
+      </app-button>
+
+      <app-button class="mb-small2" (click)="close()"> Close </app-button>
+    </div>
+  </ng-container>
+</mat-dialog-content>

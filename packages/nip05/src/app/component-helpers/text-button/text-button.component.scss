@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  height: 56px;
+  align-items: center;
+
+  a.text-button-a {
+    color: var(--primary-500);
+    font-weight: 600;
+    //font-size: 0.83333rem;
+    padding: 0 16px 0 16px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--primary-400);
+    }
+  }
+}
+
+// .text-button {
+//   display: flex;
+//   height: 40px;
+//   align-items: center;
+// }

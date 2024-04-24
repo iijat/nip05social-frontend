@@ -1,0 +1,85 @@
+:host {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: fit-content;
+  cursor: pointer;
+
+  .chip-content {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    background-color: #c0cbc8 !important;
+    border: 1px solid #c0cbc8 !important;
+    color: gray !important;
+  }
+
+  &.none {
+    border-radius: 16px;
+    background-color: var(--body-background-color);
+    border: 1px solid var(--body-background-color);
+    color: var(--body-color-dark);
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: darken(#e7e7e7, 5%);
+        background-color: darken(#e7e7e7, 5%);
+      }
+    }
+
+    &:active {
+      border-color: darken(#e7e7e7, 10%);
+      background-color: darken(#e7e7e7, 10%);
+    }
+  }
+
+  &.primary {
+    border-radius: 8px;
+    background-color: var(--primary-400);
+    border: 1px solid var(--primary-400);
+    color: #ffffff;
+
+    &:hover {
+      border-color: lighten(#f29159, 5%);
+      background-color: lighten(#6da095, 5%);
+    }
+
+    &:active {
+      border-color: lighten(#f29159, 10%);
+      background-color: lighten(#6da095, 10%);
+    }
+  }
+
+  &.accent {
+    border-radius: 16px;
+    border: 1px solid var(--accent-300);
+    background-color: var(--accent-300);
+    color: #ffffff;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: lighten(#f29159, 5%);
+        background-color: lighten(#f29159, 5%);
+      }
+    }
+
+    &:active {
+      border-color: lighten(#f29159, 10%);
+      background-color: lighten(#f29159, 10%);
+    }
+  }
+
+  &.warn {
+    border-radius: 8px;
+    border: 1px solid var(--warn-500);
+    background-color: var(--warn-500);
+    color: #ffffff;
+  }
+}

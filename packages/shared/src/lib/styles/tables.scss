@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+@import './material.scss';
+
+.common-table {
+  width: 100%;
+  font-size: 14px;
+
+  th {
+    text-align: left;
+    font-weight: 500;
+    line-height: 32px;
+    background-color: mat.get-color-from-palette($accent, 300);
+    color: #ffffff;
+    padding-left: 8px;
+  }
+
+  td {
+    background-color: mat.get-color-from-palette($accent, 50);
+    padding-left: 8px;
+    padding-right: 8px;
+    line-height: 28px;
+  }
+
+  tr {
+    &:hover > td {
+      background-color: mat.get-color-from-palette($accent, 100);
+    }
+  }
+}
