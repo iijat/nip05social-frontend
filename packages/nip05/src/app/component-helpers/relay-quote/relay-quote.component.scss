@@ -1,0 +1,34 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-divider-top {
+  width: 30%;
+  height: 2px;
+  border: 1px dashed lightgray;
+  box-sizing: border-box;
+  align-self: center;
+  margin-bottom: 12px;
+}
+
+.quote-divider-bottom {
+  width: 30%;
+  height: 2px;
+  border: 1px dashed lightgray;
+  box-sizing: border-box;
+  align-self: center;
+  margin-top: 12px;
+}
+
+a.relay-a {
+  color: var(--blue);
+  cursor: pointer;
+  text-decoration: none;
+
+  :visited {
+    color: var(--blue);
+    text-decoration: none;
+  }
+}

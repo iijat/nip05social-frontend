@@ -1,0 +1,26 @@
+:host {
+  font-size: var(--font-size-minus);
+
+  input {
+    all: unset;
+    width: inherit;
+    border-radius: 4px;
+    font-size: 14px;
+    background: var(--dark-theme-secondary);
+    height: 40px;
+    min-height: 40px;
+    padding-left: var(--padding);
+    box-sizing: border-box;
+    color: var(--dark-theme-primary);
+
+    border: 1px solid var(--dark-theme-muted);
+
+    &:focus {
+      border-color: var(--dark-theme-color-primary);
+    }
+  }
+
+  input::placeholder {
+    color: var(--dark-theme-muted);
+  }
+}

@@ -1,0 +1,79 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //text-align: center;
+
+  a {
+    text-decoration: none;
+    color: var(--blue);
+    font-weight: 500;
+
+    &:visited {
+      text-decoration: none;
+      color: var(--blue);
+    }
+  }
+
+  ::ng-deep .mat-mdc-form-field-infix {
+    display: flex;
+  }
+}
+
+.container {
+  max-width: 1024px;
+  width: 100%;
+}
+
+.identifier-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+
+  .content {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .actions {
+    width: 100%;
+    margin-left: 20px;
+    margin-top: -20px;
+    margin-right: -20px;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.nostr-stats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 24px;
+  row-gap: 12px;
+}
+
+.mat-hint-error {
+  font-size: 12px;
+  color: var(--warn-400);
+}
+
+.save-button-content-desktop {
+  width: 80px;
+}
+
+.save-button-content-handset {
+  width: 24px;
+}
+
+.red {
+  color: var(--warn-400);
+}

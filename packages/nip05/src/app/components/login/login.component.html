@@ -1,0 +1,178 @@
+<span *ngIf="loading; else notLoading" class="material-icons spin mt-normal"
+  >donut_large
+</span>
+
+<ng-template #notLoading>
+  <ng-container *ngIf="alreadyLoggedIn">
+    <span class="mt-normal lead">
+      You are already logged in! Continue in {{ forwardCounter }} ...
+    </span>
+  </ng-container>
+
+  <ng-container *ngIf="!alreadyLoggedIn">
+    <div class="container">
+      <h1>Login via <span class="nowrap">Nostr Connect</span></h1>
+    </div>
+
+    <app-card class="container">
+      <div class="title">Browser Extension</div>
+      <div class="body">
+        If you manage your nostr keys with a browser extension that implements
+        <a
+          href="https://github.com/nostr-protocol/nips/blob/master/07.md"
+          target="_blank"
+          >NIP-07</a
+        >
+        (like
+        <a href="https://getalby.com/" target="_blank">Alby</a>
+        or
+        <a href="https://diegogurpegui.com/nos2x-fox/" target="_blank"
+          >nos2x-fox</a
+        >), you can log in with just one click below.
+      </div>
+
+      <app-button
+        *ngIf="nip05BrowserExtensionAvailable"
+        class="mt-tiny"
+        color="primary"
+        (click)="onClickNIP07Login()"
+        [disabled]="nip07LoginInProgress"
+      >
+        <span *ngIf="!nip07LoginInProgress">LOGIN</span>
+        <mat-icon *ngIf="nip07LoginInProgress" class="spin">
+          donut_large
+        </mat-icon>
+      </app-button>
+
+      <span
+        *ngIf="!nip05BrowserExtensionAvailable"
+        class="body flex-row align-items-center mt-small"
+      >
+        <i class="material-icons color-accent-500">chevron_right</i>
+        <div class="color-blue">NO SUITABLE EXTENSION FOUND</div>
+      </span>
+    </app-card>
+
+    <div class="container mt-normal">
+      <h1>Login via Nostr</h1>
+    </div>
+
+    <app-card class="container">
+      <form [formGroup]="loginFormGroup">
+        <div class="flex-column">
+          <div class="title">Pubkey</div>
+          <mat-form-field appearance="outline" class="mt-tiny">
+            <mat-label>NPUB or HEX</mat-label>
+            <input
+              class="lowercase-input-visuals"
+              matInput
+              formControlName="pubkey"
+            />
+          </mat-form-field>
+
+          <div class="title">Delivery Options</div>
+          <span class="body">
+            We will send you a login code via #nostr, choose from one of the
+            following delivery options.
+          </span>
+
+          <mat-radio-group
+            class="flex-column body mt-tiny"
+            formControlName="loginSendOption"
+          >
+            <mat-radio-button value="1"
+              >via a predefined list of public relays
+            </mat-radio-button>
+            <mat-radio-button value="3"
+              >via a custom public relay</mat-radio-button
+            >
+          </mat-radio-group>
+
+          <mat-form-field
+            *ngIf="loginFormGroup.controls.loginSendOption.value === '3'"
+            appearance="outline"
+            class="mt-tiny"
+            style="margin-bottom: -8px"
+          >
+            <mat-label>Custom Relay</mat-label>
+            <input
+              class="lowercase-input-visuals"
+              matInput
+              formControlName="relay"
+            />
+            <mat-error
+              *ngIf="loginFormGroup.controls.relay.invalid"
+              class="font-size-12"
+              >{{
+                getErrorMessageFromFormControl(loginFormGroup.controls.relay)
+              }}</mat-error
+            >
+          </mat-form-field>
+
+          <div class="response-message body" *ngIf="createLoginCodeResponses">
+            <div
+              *ngFor="let response of createLoginCodeResponses"
+              [ngClass]="response?.success === true ? 'success' : 'error'"
+            >
+              {{ response?.message }}
+            </div>
+            <div
+              *ngIf="createLoginCodeRelayActivity"
+              class="material-icons spin align-self-flex-start"
+            >
+              donut_large
+            </div>
+          </div>
+
+          <app-button
+            class="mt-normal"
+            color="primary"
+            (click)="createLoginCode()"
+            [disabled]="
+              loginFormGroup.controls.pubkey.invalid ||
+              (loginFormGroup.controls.loginSendOption.value === '3' &&
+                loginFormGroup.controls.relay.invalid) ||
+              createLoginCodeActivity
+            "
+          >
+            <span *ngIf="!createLoginCodeActivity">SEND CODE</span>
+            <mat-icon *ngIf="createLoginCodeActivity" class="spin"
+              >donut_large</mat-icon
+            >
+          </app-button>
+        </div>
+      </form>
+    </app-card>
+
+    <app-card *ngIf="userId" class="mt-normal container">
+      <div class="flex-column">
+        <div class="title">Login Code</div>
+        <mat-form-field
+          appearance="outline"
+          class="mt-tiny"
+          style="margin-bottom: -8px"
+        >
+          <mat-label>6 digits</mat-label>
+          <input
+            matInput
+            [autocomplete]="uuid1"
+            [formControl]="code"
+            (keyup.enter)="redeemLoginCode()"
+          />
+        </mat-form-field>
+
+        <app-button
+          color="primary"
+          class="mt-normal"
+          (click)="redeemLoginCode()"
+          [disabled]="!code.valid || redeemLoginCodeActivity"
+        >
+          <mat-icon *ngIf="redeemLoginCodeActivity" class="spin"
+            >donut_large</mat-icon
+          >
+          <span *ngIf="!redeemLoginCodeActivity"> VERIFY CODE</span>
+        </app-button>
+      </div>
+    </app-card>
+  </ng-container>
+</ng-template>

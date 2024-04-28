@@ -1,0 +1,405 @@
+<i class="material-icons spin mt-normal" *ngIf="loading; else notLoading"
+  >donut_large
+</i>
+
+<ng-template #notLoading>
+  <div class="container">
+    <h1 class="mt-normal">My Identifiers</h1>
+  </div>
+
+  <ng-container
+    *ngFor="let myRegistration of myRegistrationChangeables; let i = index"
+  >
+    <app-space *ngIf="i > 0" size="large"></app-space>
+    <app-card class="container">
+      <div class="container headline font-weight-500">
+        {{ myRegistration.original.identifier }}&#64;{{
+          myRegistration.original.systemDomain.name
+        }}
+      </div>
+
+      <div class="title mt-normal">Nostr Statistics</div>
+      <div class="nostr-stats">
+        <app-stats-block
+          name="Lookups"
+          value="{{
+            nostrAddressStatistics[myRegistration.original.id]?.noOfLookups
+          }}"
+        ></app-stats-block>
+        <app-stats-block
+          name="Lookups today"
+          value="{{
+            nostrAddressStatistics[myRegistration.original.id]?.noOfLookupsToday
+          }}"
+        ></app-stats-block>
+        <app-stats-block
+          name="Lookups yesterday"
+          value="{{
+            nostrAddressStatistics[myRegistration.original.id]
+              ?.noOfLookupsYesterday
+          }}"
+        ></app-stats-block>
+      </div>
+
+      <div class="title mt-large">Nostr Relays</div>
+      <div class="body mb-small">
+        You can optionally define relays here. Clients can use these relays to
+        learn where to find you.
+      </div>
+
+      <!-- RELAYS -->
+      <ng-container
+        *ngFor="
+          let registrationRelayChangeable of myRegistration.registrationRelayChangeables
+        "
+      >
+        <div class="flex-row gap-small mt-small">
+          <mat-form-field appearance="outline" color="accent" class="width-100">
+            <!-- <mat-label>LN Address</mat-label> -->
+            <input
+              matInput
+              [(ngModel)]="registrationRelayChangeable.address"
+              placeholder="Relay Address"
+              [autocomplete]="uuid1"
+            />
+            <!-- DELETE BUTTON (option 1) -->
+            <button
+              color="warn"
+              *ngIf="
+                registrationRelayChangeable.address &&
+                !registrationRelayChangeable.hasAddressChanged
+              "
+              matSuffix
+              mat-icon-button
+              (click)="
+                deleteRelay($event, registrationRelayChangeable, myRegistration)
+              "
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+
+            <!-- RESET VALUE BUTTON (option 2) -->
+            <button
+              *ngIf="
+                registrationRelayChangeable.address &&
+                registrationRelayChangeable.hasAddressChanged
+              "
+              matSuffix
+              mat-icon-button
+              (click)="
+                registrationRelayChangeable.address =
+                  registrationRelayChangeable.original.address
+              "
+            >
+              <mat-icon>undo</mat-icon>
+            </button>
+
+            <mat-hint
+              *ngIf="!registrationRelayChangeable.isAddressValid"
+              class="mat-hint-error"
+              >{{ registrationRelayChangeable.invalidRelayAddressMessage }}
+            </mat-hint>
+          </mat-form-field>
+
+          <!-- SAVE BUTTON -->
+          <app-button
+            color="accent"
+            [disabled]="
+              !registrationRelayChangeable.hasAddressChanged ||
+              !registrationRelayChangeable.isAddressValid ||
+              registrationRelayChangeable.activity
+            "
+            (click)="registrationRelayChangeable.save()"
+          >
+            <div
+              class="flex-row align-items-center justify-content-center"
+              [ngClass]="
+                responsiveService.isHandset
+                  ? 'save-button-content-handset'
+                  : 'save-button-content-desktop'
+              "
+            >
+              <ng-container *ngIf="!registrationRelayChangeable.activity">
+                <!-- Text in case for DESKTOP -->
+                <span *ngIf="!responsiveService.isHandset">Save</span>
+                <mat-icon *ngIf="responsiveService.isHandset"> save </mat-icon>
+              </ng-container>
+
+              <mat-icon
+                *ngIf="registrationRelayChangeable.activity"
+                class="spin"
+                >donut_large</mat-icon
+              >
+            </div>
+          </app-button>
+        </div>
+      </ng-container>
+      <button mat-flat-button color="accent" (click)="addRelay(myRegistration)">
+        ADD RELAY
+      </button>
+
+      <!-- ############################ -->
+      <!-- LIGHTNING ADDRESS FORWARDING -->
+      <!-- ############################ -->
+      <div class="title mt-large">Lightning Address Forwarding</div>
+      <div class="body">
+        Forward your nostr address to your existing lightning address (e.g. from
+        <a href="https://www.walletofsatoshi.com/" target="_blank"
+          >Wallet of Satoshi</a
+        >
+        or
+        <a href="https://getalby.com" target="_blank">Alby</a>). You are then
+        able to also use your nostr address as LN address for payments (e.g. in
+        your nostr client).
+      </div>
+
+      <div class="flex-row gap-small mt-small">
+        <mat-form-field
+          appearance="outline"
+          class="width-100"
+          subscriptSizing="dynamic"
+        >
+          <!-- <mat-label>LN Address</mat-label> -->
+          <input
+            matInput
+            placeholder="LN Address"
+            [autocomplete]="uuid2"
+            [(ngModel)]="myRegistration.lightningAddress"
+          />
+          <!-- DELETE BUTTON (option 1) -->
+          <button
+            color="warn"
+            *ngIf="
+              myRegistration.lightningAddress &&
+              !myRegistration.hasLightningAddressChanged
+            "
+            matSuffix
+            mat-icon-button
+            (click)="deleteLightningAddress($event, myRegistration)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <!-- RESET VALUE BUTTON (option 2) -->
+          <button
+            *ngIf="
+              myRegistration.lightningAddress &&
+              myRegistration.hasLightningAddressChanged
+            "
+            matSuffix
+            mat-icon-button
+            (click)="
+              myRegistration.lightningAddress =
+                myRegistration.original.lightningAddress
+            "
+          >
+            <mat-icon>undo</mat-icon>
+          </button>
+
+          <mat-hint
+            *ngIf="
+              myRegistration.lightningAddress &&
+              !myRegistration.isLightningAddressValid
+            "
+            class="mat-hint-error"
+            >{{ myRegistration.invalidLightningAddressMessage }}
+          </mat-hint>
+        </mat-form-field>
+
+        <app-button
+          color="accent"
+          [disabled]="
+            !myRegistration.hasLightningAddressChanged ||
+            !myRegistration.isLightningAddressValid ||
+            myRegistration.activity
+          "
+          (click)="myRegistration.save()"
+        >
+          <div
+            class="flex-row align-items-center justify-content-center"
+            [ngClass]="
+              responsiveService.isHandset
+                ? 'save-button-content-handset'
+                : 'save-button-content-desktop'
+            "
+          >
+            <ng-container *ngIf="!myRegistration.activity">
+              <!-- Text in case for DESKTOP -->
+              <span *ngIf="!responsiveService.isHandset">Save</span>
+              <mat-icon *ngIf="responsiveService.isHandset"> save </mat-icon>
+            </ng-container>
+            <mat-icon *ngIf="myRegistration.activity" class="spin"
+              >donut_large</mat-icon
+            >
+          </div>
+        </app-button>
+      </div>
+
+      <!-- ######## -->
+      <!-- EMAIL IN -->
+      <!-- ######## -->
+      <div class="title mt-large">Receive Emails on Nostr</div>
+      <div class="body">
+        Use your nostr address as regular email address and receive emails as
+        direct messages on nostr. We publish these DMs to:
+      </div>
+      <ul class="body">
+        <li>
+          our private relay
+          <span style="font-weight: 500">wss://relay.nip05.social</span>
+          *
+        </li>
+        <li>
+          and to all relays that you have configured above including your
+          <a
+            href="https://github.com/nostr-protocol/nips/blob/master/65.md"
+            target="_blank"
+            >NIP-65 relay lists
+          </a>
+          on them
+        </li>
+      </ul>
+
+      <div class="mt-small body">
+        *) Please note, that the relay requires
+        <a
+          href="https://github.com/nostr-protocol/nips/blob/master/42.md"
+          target="_blank"
+          >NIP-42 authentication
+        </a>
+        (even for read access). Make sure your nostr client supports this when
+        you add the relay to your client's relay list.
+      </div>
+
+      <div class="flex-row gap-small mt-small">
+        <mat-checkbox
+          [(ngModel)]="myRegistration.emailForwardingOn"
+          (ngModelChange)="onEmailForwardingOnChange(myRegistration)"
+        >
+          <span>{{
+            myRegistration.emailForwardingOn ? 'enabled' : 'disabled'
+          }}</span>
+          <span class="red ml-normal">
+            {{
+              myRegistration.emailForwardingOn &&
+              myRegistration.registrationRelayChangeables.length === 0
+                ? 'ATTENTION: Please configure a relay above'
+                : ''
+            }}
+          </span>
+        </mat-checkbox>
+      </div>
+
+      <!-- ######### -->
+      <!-- EMAIL OUT -->
+      <!-- ######### -->
+      <div class="title mt-large">Send Emails from Nostr (coming soon)</div>
+      <div class="body">
+        Add our relay
+        <span style="font-weight: 500">wss://relay.nip05.social</span> * to your
+        client's relay list. Send an email as DM from nostr either to our
+        dedicated Email Out Bot or as response to a previously received message
+        from one of the email mirror accounts.<br />
+        Please define a
+        <span class="font-weight-500">default subject</span> below that we will
+        use in case your message does not include the special command code for
+        the email subject.
+      </div>
+
+      <div class="mt-small body">
+        *) Please note, that the relay requires
+        <a
+          href="https://github.com/nostr-protocol/nips/blob/master/42.md"
+          target="_blank"
+          >NIP-42 authentication
+        </a>
+        (even for read access). Make sure your nostr client supports this when
+        you add the relay to your client's relay list.
+      </div>
+
+      <mat-checkbox
+        [(ngModel)]="myRegistration.emailOut"
+        (ngModelChange)="onEmailOutChange(myRegistration)"
+        class="mt-small"
+      >
+        <span>{{
+          myRegistration.emailOut
+            ? 'use this address as email sender address'
+            : 'this address is NOT used as email sender address'
+        }}</span>
+      </mat-checkbox>
+      <div class="flex-row gap-small mt-small">
+        <mat-form-field
+          appearance="outline"
+          class="width-100"
+          subscriptSizing="dynamic"
+        >
+          <input
+            matInput
+            placeholder="Default email subject"
+            [autocomplete]="uuid3"
+            [(ngModel)]="myRegistration.emailOutSubject"
+          />
+          <button
+            *ngIf="
+              myRegistration.emailOutSubject &&
+              myRegistration.hasEmailOutSubjectChanged
+            "
+            matSuffix
+            mat-icon-button
+            (click)="
+              myRegistration.emailOutSubject =
+                myRegistration.original.emailOutSubject
+            "
+          >
+            <mat-icon>undo</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <!-- [disabled]="
+        !myRegistration.hasEmailOutSubjectChanged || myRegistration.activity
+      " -->
+
+        <app-button
+          color="accent"
+          [disabled]="true"
+          (click)="myRegistration.save()"
+        >
+          <div
+            class="flex-row align-items-center justify-content-center"
+            [ngClass]="
+              responsiveService.isHandset
+                ? 'save-button-content-handset'
+                : 'save-button-content-desktop'
+            "
+          >
+            <ng-container *ngIf="!myRegistration.activity">
+              <span *ngIf="!responsiveService.isHandset">Save</span>
+              <mat-icon *ngIf="responsiveService.isHandset"> save </mat-icon>
+            </ng-container>
+            <mat-icon *ngIf="myRegistration.activity" class="spin">
+              donut_large
+            </mat-icon>
+          </div>
+        </app-button>
+      </div>
+
+      <!-- DANGER ZONE: DELETE NOSTR ADDRESS -->
+      <div class="title mt-large color-warn-400">Danger Zone</div>
+      <div class="body mb-small">
+        The action below is irreversible, use with care.
+      </div>
+      <button
+        mat-flat-button
+        color="warn"
+        (click)="deleteRegistration(myRegistration)"
+      >
+        DELETE IDENTIFIER
+      </button>
+    </app-card>
+  </ng-container>
+
+  <span *ngIf="myRegistrationChangeables?.length === 0" class="lead">
+    You currently don't have any identifiers. Go to the register page to get
+    one.
+  </span>
+</ng-template>

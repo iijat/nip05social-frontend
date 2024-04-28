@@ -1,0 +1,22 @@
+<h1 class="title">{{ data.title ?? 'Confirm' }}</h1>
+
+<div class="flex-column" style="padding: 0 12px">
+  <div [innerHTML]="data.text" class="mt-small"></div>
+  <div class="confirm-dialog-actions">
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <app-button (click)="cancel()">No</app-button>
+
+    <app-button
+      color="warn"
+      [disabled]="activity"
+      (click)="ok()"
+      cdkFocusInitial
+    >
+      <span *ngIf="!activity">Yes</span>
+      <mat-icon *ngIf="activity" class="spin">donut_large</mat-icon>
+    </app-button>
+  </div>
+</div>

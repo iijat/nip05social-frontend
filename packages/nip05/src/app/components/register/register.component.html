@@ -1,0 +1,253 @@
+<span
+  *ngIf="loading.isOngoing; else notLoading"
+  class="material-icons spin mt-normal"
+  >donut_large
+</span>
+
+<ng-template #notLoading>
+  <div class="container">
+    <h1>Nostr Address</h1>
+  </div>
+
+  <app-card class="container">
+    <div class="flex-column">
+      <div class="title">Desired Nostr Address</div>
+      <div class="responsive-row mt-tiny">
+        <mat-form-field
+          appearance="outline"
+          [ngClass]="responsiveService.isHandset ? 'width-100' : 'flex-grow-1'"
+        >
+          <mat-label>Name</mat-label>
+          <input
+            class="lowercase-input-visuals"
+            matInput
+            [formControl]="name"
+            (keyup)="delayedAvailabilityCheck()"
+            [disabled]="!!registration"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          [ngClass]="responsiveService.isHandset ? 'width-100' : ''"
+        >
+          <mat-label>Domain</mat-label>
+          <mat-select
+            [formControl]="selectedSystemDomain"
+            (selectionChange)="delayedAvailabilityCheck()"
+            [disabled]="!!registration"
+          >
+            <mat-option
+              *ngFor="let systemDomain of systemDomains"
+              [value]="systemDomain"
+            >
+              {{ systemDomain.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div
+        class="flex-row align-items-center"
+        style="height: 24px; margin-top: -16px"
+      >
+        <div class="mr-small">Availability:</div>
+        <mat-icon
+          *ngIf="
+            registrationCheckActivity;
+            else noRegistrationCheckActivityElement
+          "
+          class="spin"
+          >donut_large</mat-icon
+        >
+        <ng-template #noRegistrationCheckActivityElement>
+          <div
+            *ngIf="registrationCheck"
+            [ngClass]="registrationCheck.canBeRegistered ? 'success' : 'error'"
+          >
+            <ng-container *ngIf="registrationCheck.canBeRegistered">
+              ok
+            </ng-container>
+            <ng-container *ngIf="!registrationCheck.canBeRegistered">
+              {{ registrationCheck.reason }}
+            </ng-container>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </app-card>
+
+  <div class="container mt-normal">
+    <h1>Register via <span class="nowrap">Nostr Connect</span></h1>
+  </div>
+  <app-card class="container">
+    <div class="flex-column">
+      <div class="title">Browser Extension</div>
+      <div class="body">
+        If you manage your nostr keys with a browser extension that implements
+        <a
+          href="https://github.com/nostr-protocol/nips/blob/master/07.md"
+          target="_blank"
+          >NIP-07</a
+        >
+        (like
+        <a href="https://getalby.com/" target="_blank">Alby</a>
+        or
+        <a href="https://diegogurpegui.com/nos2x-fox/" target="_blank"
+          >nos2x-fox</a
+        >), you can log in with just one click.
+      </div>
+
+      <app-button
+        *ngIf="nip05BrowserExtensionAvailable"
+        [disabled]="
+          name.invalid ||
+          selectedSystemDomain.invalid ||
+          !registrationCheck?.canBeRegistered ||
+          nip07RegisterInProgress
+        "
+        class="mt-tiny"
+        color="primary"
+        (click)="onClickNIP07Register()"
+      >
+        <span *ngIf="!nip07RegisterInProgress">REGISTER</span>
+        <mat-icon *ngIf="nip07RegisterInProgress" class="spin">
+          donut_large
+        </mat-icon>
+      </app-button>
+
+      <span
+        *ngIf="!nip05BrowserExtensionAvailable"
+        class="body flex-row align-items-center mt-small"
+      >
+        <i class="material-icons color-accent-500">chevron_right</i>
+        <div class="color-blue">NO SUITABLE EXTENSION FOUND</div>
+      </span>
+    </div>
+  </app-card>
+
+  <div class="container mt-normal">
+    <h1>Register via Nostr</h1>
+  </div>
+  <app-card class="container">
+    <div class="flex-column">
+      <div class="title mt-small">Pubkey</div>
+      <mat-form-field appearance="outline" class="mt-tiny">
+        <mat-label>NPUB or HEX</mat-label>
+        <input
+          class="lowercase-input-visuals"
+          matInput
+          [formControl]="pubkey"
+          [disabled]="!!registration"
+        />
+      </mat-form-field>
+
+      <!-- // TODO: DELIVERY OPTIONS -->
+      <div class="title">Delivery Options</div>
+      <span class="body">
+        We will send you a registration code via #nostr, choose from one of the
+        following delivery options.
+      </span>
+
+      <mat-radio-group
+        class="flex-column body mt-tiny"
+        [formControl]="registrationSendOption"
+      >
+        <mat-radio-button value="1"
+          >via a predefined list of public relays
+        </mat-radio-button>
+        <mat-radio-button value="3">via a custom public relay</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field
+        *ngIf="registrationSendOption.value === '3'"
+        appearance="outline"
+        class="mt-tiny"
+        style="margin-bottom: -8px"
+      >
+        <mat-label>Custom Relay</mat-label>
+        <input class="lowercase-input-visuals" matInput [formControl]="relay" />
+        <mat-error *ngIf="relay.invalid" class="font-size-12">{{
+          getErrorMessageFromFormControl(relay)
+        }}</mat-error>
+      </mat-form-field>
+
+      <!-- REGISTER or RESEND: REGISTER -->
+      <ng-container *ngIf="!registration">
+        <app-button
+          class="mt-normal"
+          color="primary"
+          [disabled]="
+            name.invalid ||
+            selectedSystemDomain.invalid ||
+            !registrationCheck?.canBeRegistered
+          "
+          (click)="createRegistrationCode()"
+        >
+          <span
+            *ngIf="
+              !createRegistrationCodeActivity;
+              else createRegistrationCodeActivityElement
+            "
+            >REGISTER</span
+          >
+          <ng-template #createRegistrationCodeActivityElement>
+            <mat-icon class="spin">donut_large</mat-icon>
+          </ng-template>
+        </app-button>
+      </ng-container>
+      <!-- REGISTER or RESEND: RESEND -->
+      <ng-container *ngIf="registration">
+        <app-button
+          class="mt-normal"
+          color="primary"
+          [disabled]="resendRegistrationCodeActivity"
+          (click)="resendRegistrationCode()"
+        >
+          <span
+            *ngIf="
+              !resendRegistrationCodeActivity;
+              else resendRegistrationCodeActivityElement
+            "
+            >RESEND</span
+          >
+          <ng-template #resendRegistrationCodeActivityElement>
+            <mat-icon class="spin">donut_large</mat-icon>
+          </ng-template>
+        </app-button>
+      </ng-container>
+    </div>
+  </app-card>
+
+  <app-card *ngIf="registration" class="mt-normal container">
+    <div class="flex-column">
+      <div class="title">Registration Code</div>
+      <mat-form-field
+        appearance="outline"
+        class="mt-tiny"
+        style="margin-bottom: -8px"
+      >
+        <mat-label>6 digits</mat-label>
+        <input matInput [formControl]="code" />
+      </mat-form-field>
+
+      <app-button
+        color="primary"
+        class="mt-normal"
+        [disabled]="!code.valid || redeemRegistrationCodeActivity"
+        (click)="redeemRegistrationCode()"
+      >
+        <span
+          *ngIf="
+            !redeemRegistrationCodeActivity;
+            else redeemRegistrationCodeActivityElement
+          "
+          >VERIFY CODE</span
+        >
+        <ng-template #redeemRegistrationCodeActivityElement>
+          <mat-icon class="spin">donut_large</mat-icon>
+        </ng-template>
+      </app-button>
+    </div>
+  </app-card>
+</ng-template>

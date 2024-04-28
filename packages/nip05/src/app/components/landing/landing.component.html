@@ -1,0 +1,15 @@
+<div class="flex-column">
+  <div class="header">
+    <app-header
+      [ngClass]="responsiveService.isHandset ? 'handset' : 'non-handset'"
+    ></app-header>
+  </div>
+
+  <div class="content">
+    <div [ngClass]="responsiveService.isHandset ? 'handset' : 'non-handset'">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

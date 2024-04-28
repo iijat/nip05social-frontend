@@ -1,0 +1,36 @@
+$bg-color: #2c4060;
+
+.profile-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 6px;
+  padding: 6px 12px;
+  margin-left: -12px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+
+  color: inherit;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  overflow-wrap: anywhere;
+
+  &:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &:hover {
+    background-color: lighten($bg-color, 10%);
+  }
+
+  .suffix {
+    font-size: 10px;
+    opacity: 0.3;
+  }
+}

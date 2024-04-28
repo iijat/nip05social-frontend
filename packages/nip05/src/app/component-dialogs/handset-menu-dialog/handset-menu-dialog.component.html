@@ -1,0 +1,78 @@
+<div class="handset-menu-dialog-header">
+  <a class="brand">
+    <span class="material-icons icon"> hive </span>
+    <div class="chars">NIP</div>
+    <div class="numbers">05</div>
+    <div class="dot">.</div>
+    <div class="chars">social</div>
+  </a>
+  <button mat-icon-button color="primary" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<a
+  routerLink="/home"
+  routerLinkActive="active-link"
+  class="border-top"
+  (click)="action('home')"
+  >Home</a
+>
+
+<a
+  routerLink="/register"
+  routerLinkActive="active-link"
+  (click)="action('register')"
+>
+  Register
+</a>
+
+<a
+  routerLink="/pricing"
+  routerLinkActive="active-link"
+  (click)="action('pricing')"
+>
+  Plans & Pricing
+</a>
+
+<a routerLink="/stats" routerLinkActive="active-link" (click)="action('stats')">
+  Stats
+</a>
+
+<a
+  routerLink="/directory"
+  routerLinkActive="active-link"
+  (click)="action('directory')"
+  >Directory</a
+>
+
+<!-- NOT LOGGED IN -->
+<ng-container *ngIf="!tokenService.token">
+  <app-space size="small"></app-space>
+  <app-button class="mr-small ml-small" color="accent" (click)="action('login')"
+    >Login</app-button
+  >
+</ng-container>
+
+<!-- LOGGED IN -->
+<ng-container *ngIf="tokenService.token">
+  <a
+    routerLink="/s/home"
+    routerLinkActive="active-link"
+    (click)="action('protected-home')"
+    >My Identifiers</a
+  >
+  <a
+    routerLink="/s/account"
+    routerLinkActive="active-link"
+    (click)="action('protected-account')"
+    >My Account</a
+  >
+  <app-space size="small"></app-space>
+  <app-button
+    class="mr-small ml-small"
+    color="accent"
+    (click)="action('logout')"
+    >Logout</app-button
+  >
+</ng-container>

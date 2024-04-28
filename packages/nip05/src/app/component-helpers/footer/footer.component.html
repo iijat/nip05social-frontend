@@ -1,0 +1,32 @@
+<div class="footer-content">
+  <div [ngClass]="responsiveService.isHandset ? 'handset' : 'non-handset'">
+    <!-- HANDSET -->
+    <ng-container *ngIf="responsiveService.isHandset">
+      <a routerLink="tos" class="bold">Terms and Conditions</a>
+
+      <a routerLink="contact" class="bold">Contact</a>
+
+      <div class="flex-column align-items-center">
+        <div class="font-size-12">v{{ version }}</div>
+        <div>
+          &copy; {{ year }}
+          <a href="https://www.iijat.com" target="_blank">IIJAT</a>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- NON-HANDSET -->
+    <ng-container *ngIf="!responsiveService.isHandset">
+      <div>
+        &copy; {{ year }}
+        <a href="https://www.iijat.com" target="_blank">IIJAT</a>
+      </div>
+
+      <a routerLink="tos" class="bold">Terms and Conditions</a>
+
+      <a routerLink="contact" class="bold">Contact</a>
+
+      <div class="d-version">v{{ version }}</div>
+    </ng-container>
+  </div>
+</div>

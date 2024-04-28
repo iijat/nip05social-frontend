@@ -1,0 +1,20 @@
+.stats-block {
+  display: flex;
+  flex-direction: column;
+
+  border-top: 1px solid var(--gray-400);
+  border-bottom: 1px solid var(--gray-400);
+
+  padding: 12px;
+  box-sizing: border-box;
+
+  .line-1 {
+    color: var(--blue);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .line-2 {
+    font-weight: 500;
+  }
+}

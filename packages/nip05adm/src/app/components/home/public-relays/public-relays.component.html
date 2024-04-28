@@ -1,0 +1,45 @@
+<div class="flex-row align-items-center gap-normal">
+  <mat-form-field subscriptSizing="dynamic" appearance="outline">
+    <mat-label>Relay Url</mat-label>
+    <input type="text" matInput [(ngModel)]="relayUrl" [autocomplete]="uuid1" />
+  </mat-form-field>
+
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!relayUrl || activity"
+    (click)="createRelay()"
+  >
+    Add Relay
+  </button>
+</div>
+
+<table class="common-table mt-normal">
+  <thead>
+    <tr>
+      <th>Relay</th>
+      <th>Active</th>
+      <th>Created At</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let relay of publicRelays">
+      <td>
+        {{ relay.url }}
+      </td>
+      <td>
+        <mat-slide-toggle
+          #isActiveElement
+          [ngModel]="relay.isActive"
+          color="primary"
+          (ngModelChange)="onIsActiveChange($event, relay, isActiveElement)"
+        >
+          {{ relay.isActive ? 'yes' : 'no' }}
+        </mat-slide-toggle>
+      </td>
+      <td>{{ relay.createdAt | date : 'MMM d, y - HH.mm' }}</td>
+      <td>{{ relay.notes }}</td>
+    </tr>
+  </tbody>
+</table>

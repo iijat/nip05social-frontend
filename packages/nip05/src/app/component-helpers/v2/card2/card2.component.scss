@@ -1,0 +1,20 @@
+:host {
+  .card {
+    border-width: 2px;
+    border-color: var(--dark-theme-border);
+    border-radius: 24px;
+    padding: var(--padding);
+
+    &:not(.transparent) {
+      background: #131d34;
+    }
+
+    &.border-dashed {
+      border-style: dashed;
+    }
+
+    &.border-solid {
+      border-style: solid;
+    }
+  }
+}

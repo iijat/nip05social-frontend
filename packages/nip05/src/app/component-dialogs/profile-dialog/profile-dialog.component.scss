@@ -1,0 +1,140 @@
+$bg-color: #2c4060;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  background-color: $bg-color;
+  height: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ffffff;
+
+  color: #ffffff;
+
+  overflow-x: hidden;
+}
+
+.banner-area {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+
+  .banner {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    object-fit: cover;
+
+    display: flex;
+    width: 100%;
+
+    &.handset {
+      height: 160px;
+    }
+
+    &.desktop {
+      height: 200px;
+    }
+  }
+
+  .actions {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    display: flex;
+    flex-direction: row-reverse;
+    //align-items: center;
+  }
+}
+
+.picture-desktop {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+
+  border-radius: 100%;
+  outline: 4px solid #ffffff;
+  outline-offset: 4px;
+}
+
+.picture-handset {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+
+  border-radius: 100%;
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.inv-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 6px;
+  padding: 6px 12px;
+  margin-left: -12px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+
+  color: inherit;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  &:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &:hover {
+    background-color: lighten($bg-color, 10%);
+  }
+}
+
+.no-wrap {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+}
+
+.suffix {
+  font-size: 10px;
+  opacity: 0.3;
+}
+
+.not-shown {
+  visibility: hidden;
+}
+
+.picture-area {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+}
+
+.no-metadata-found {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-300);
+  font-size: 14px;
+}

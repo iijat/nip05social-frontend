@@ -1,0 +1,40 @@
+<span
+  *ngIf="loading; else notLoading"
+  class="material-icons spin mt-normal mb-normal"
+  >donut_large
+</span>
+
+<ng-template #notLoading>
+  <div class="container">
+    <h1>Directory</h1>
+  </div>
+
+  <app-card class="container">
+    <div class="title">All Registrations</div>
+
+    <div class="body mb-tiny">
+      Click on a row to get more information about the user.
+    </div>
+
+    <table class="nip05-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Domain</th>
+          <th>Lookups</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let registration of registrations"
+          (click)="showProfile(registration.pubkey)"
+          class="table-row"
+        >
+          <td>{{ registration.name }}</td>
+          <td>{{ registration.domain }}</td>
+          <td>{{ registration.lookups }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </app-card>
+</ng-template>

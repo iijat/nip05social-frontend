@@ -1,0 +1,93 @@
+{
+  "name": "nostr",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "config:nip05": "ts-node -P tsconfig.base.json set-env-nip05.ts",
+    "config:nip05adm": "ts-node -P tsconfig.base.json set-env-nip05adm.ts",
+    "start:nip05": "npm run config:nip05 && nx serve nip05",
+    "start:nip05adm": "npm run config:nip05adm && nx serve nip05adm",
+    "build:nip05": "npm run config:nip05 && nx build nip05",
+    "build:delmo": "npm run config:delmo && nx build delmo",
+    "build-dev:nip05": "npm run config:nip05 && nx build nip05 --configuration development",
+    "build-dev:delmo": "npm run config:delmo && nx build delmo --configuration development"
+  },
+  "private": true,
+  "custom": {
+    "nip05": {
+      "name": "nip05.social",
+      "version": "2.1.2"
+    },
+    "nip05adm": {
+      "name": "nip05.social admin",
+      "version": "0.0.4"
+    }
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "17.1.2",
+    "@angular-devkit/core": "17.1.2",
+    "@angular-devkit/schematics": "17.1.2",
+    "@angular-eslint/eslint-plugin": "17.0.1",
+    "@angular-eslint/eslint-plugin-template": "17.0.1",
+    "@angular-eslint/template-parser": "17.0.1",
+    "@angular/cli": "~17.1.0",
+    "@angular/compiler-cli": "17.1.2",
+    "@angular/language-service": "17.1.2",
+    "@nx/angular": "17.3.1",
+    "@nx/cypress": "17.3.1",
+    "@nx/eslint-plugin": "17.3.1",
+    "@nx/jest": "17.3.1",
+    "@nx/js": "17.3.1",
+    "@nx/web": "17.3.1",
+    "@schematics/angular": "17.1.2",
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.16.9",
+    "@types/uuid": "^9.0.1",
+    "@typescript-eslint/eslint-plugin": "6.20.0",
+    "@typescript-eslint/parser": "6.20.0",
+    "cypress": "^13.0.0",
+    "eslint": "8.48.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-cypress": "2.15.1",
+    "fs": "^0.0.1-security",
+    "jest": "^29.4.1",
+    "jest-environment-jsdom": "^29.4.1",
+    "jest-preset-angular": "13.1.6",
+    "nx": "17.3.1",
+    "prettier": "^2.6.2",
+    "ts-jest": "29.1.0",
+    "ts-node": "10.9.1",
+    "typescript": "5.3.3",
+    "@nx/eslint": "17.3.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@angular/animations": "17.1.2",
+    "@angular/cdk": "17.1.2",
+    "@angular/common": "17.1.2",
+    "@angular/compiler": "17.1.2",
+    "@angular/core": "17.1.2",
+    "@angular/forms": "17.1.2",
+    "@angular/material": "17.1.2",
+    "@angular/platform-browser": "17.1.2",
+    "@angular/platform-browser-dynamic": "17.1.2",
+    "@angular/router": "17.1.2",
+    "@apollo/client": "^3.7.12",
+    "@ng-matero/extensions": "^17.1.0",
+    "@noble/curves": "^1.0.0",
+    "@scure/base": "^1.1.1",
+    "@swimlane/ngx-charts": "^20.1.2",
+    "angularx-qrcode": "^17.0.0",
+    "apollo-angular": "^6.0.0",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "graphql-ws": "^5.13.1",
+    "nostr-tools": "^1.12.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "uuid": "^9.0.0",
+    "zone.js": "0.14.3"
+  }
+}

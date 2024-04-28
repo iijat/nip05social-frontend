@@ -1,0 +1,111 @@
+<span class="title">Nostr Service Provider </span>
+
+<!-- <span class="margin-top-2">
+  Register a free <span class="highlight-text">Nostr Address</span> with
+  <span class="highlight-text">Lightning Address Forwarding</span> and the
+  option to Receive and Send Emails on Nostr.
+</span> -->
+
+<app-card2 class="margin-top-2" border="dashed">
+  <div class="flex-column align-items-center">
+    <span class="text">
+      Get a free <span class="highlight-text">Nostr Address</span>
+    </span>
+
+    <span class="muted margin-top margin-bottom">
+      Pick a domain, register your address and use it as
+      <span style="color: white">Nostr Identity</span>, for
+      <span style="color: white">Lightning Payments</span> and for sending and
+      receiving <span style="color: white">Emails</span>.
+    </span>
+
+    <button class="button">Register</button>
+
+    <mat-grid-list cols="2" rowHeight="80px" class="domain-selection-grid">
+      <mat-grid-tile>
+        <span
+          class="domain"
+          [class.selected]="selectedDomain === 'nip05.social'"
+          (click)="selectedDomain = 'nip05.social'"
+        >
+          nip05.social
+        </span>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <span
+          class="domain"
+          [class.selected]="selectedDomain === 'protonostr.com'"
+          (click)="selectedDomain = 'protonostr.com'"
+        >
+          protonostr.com
+        </span>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <span
+          class="domain"
+          [class.selected]="selectedDomain === 'nostrcom.com'"
+          (click)="selectedDomain = 'nostrcom.com'"
+        >
+          nostrcom.com
+        </span>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <span
+          class="domain"
+          [class.selected]="selectedDomain === 'nostrid.info'"
+          (click)="selectedDomain = 'nostrid.info'"
+        >
+          nostrid.info
+        </span>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <span
+          class="domain"
+          [class.selected]="selectedDomain === 'nip05.cloud'"
+          (click)="selectedDomain = 'nip05.cloud'"
+        >
+          nip05.cloud
+        </span>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <span
+          class="domain"
+          [class.selected]="selectedDomain === 'unitednostr.com'"
+          (click)="selectedDomain = 'unitednostr.com'"
+        >
+          unitednostr.com
+        </span>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</app-card2>
+
+<!-- <app-card2 class="margin-top-2" background="transparent">
+  <div class="flex-column align-items-center">
+    <span class="text">
+      One address for <span class="highlight-text"> Identity </span> and
+      <span class="highlight-text nowrap">Lightning Payments</span>
+    </span>
+    <span class="muted margin-top">
+      Enable lightning payments sent to your registered Nostr Address by
+      configuring a forwarding to an existing Lightning Address.
+    </span>
+  </div>
+</app-card2>
+
+<app-card2 class="margin-top-2" background="transparent">
+  <div class="flex-column align-items-center">
+    <span class="text">
+      One address for <span class="highlight-text"> Email </span> (In & OUT)
+    </span>
+    <span class="muted margin-top">
+      Enable lightning payments sent to your registered Nostr Address by
+      configuring a forwarding to an existing Lightning Address.
+    </span>
+  </div>
+</app-card2> -->

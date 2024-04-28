@@ -1,0 +1,45 @@
+$large: 48px;
+$normal: 24px;
+$small: 12px;
+$tiny: 6px;
+
+.pl-normal {
+  padding-left: $normal;
+}
+
+.pr-normal {
+  padding-right: $normal;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+span {
+  &.lead {
+    font-size: 20px;
+  }
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.container {
+  max-width: 1024px;
+  width: 100%;
+}

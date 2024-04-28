@@ -1,0 +1,140 @@
+<span *ngIf="loading; else notLoading">Loading</span>
+
+<ng-template #notLoading>
+  <mtx-split direction="vertical">
+    <mtx-split-pane>
+      <div>
+        <table class="common-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>System User</th>
+              <th>Pubkey</th>
+              <th>Last Seen</th>
+              <th>Registrations</th>
+              <th>Plan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let userWrapper of userWrappers">
+              <td>
+                <mat-checkbox
+                  [(ngModel)]="userWrapper.isSelected"
+                ></mat-checkbox>
+              </td>
+              <td>{{ userWrapper.user.isSystemUser ? 'yes' : '' }}</td>
+              <td>{{ userWrapper.user.pubkey }}</td>
+              <td>
+                <div
+                  class="flex-column"
+                  style="max-width: 220px; white-space: nowrap"
+                >
+                  <span style="text-overflow: ellipsis; overflow-x: hidden">{{
+                    userWrapper.user.lastSeenNip05
+                  }}</span>
+                  <span>{{
+                    userWrapper.user.lastSeenNip05At | date : 'MMM y, d - HH:mm'
+                  }}</span>
+                  <!-- <span>{{userWrapper.user.lastSeenNip05}}</span> -->
+                </div>
+              </td>
+              <td>
+                <div class="flex-column">
+                  <div
+                    *ngFor="let registration of userWrapper.user.registrations"
+                    class="flex-row gap-normal"
+                  >
+                    <span>
+                      {{ registration.identifier }}&#64;{{
+                        registration.systemDomain.name
+                      }}
+                    </span>
+
+                    <span *ngIf="registration.lightningAddress">LN</span>
+
+                    <span *ngIf="registration.emailForwardingOn === true">
+                      Email IN
+                    </span>
+
+                    <span>{{
+                      registration.lastLookupDate | date : 'MMM y, d'
+                    }}</span>
+                  </div>
+                </div>
+              </td>
+              <td [class.opacity-50]="userWrapper.user.subscriptionId === 1">
+                {{ userWrapper.user.subscription.name }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mtx-split-pane>
+    <mtx-split-pane>
+      <div style="height: 100%">
+        <mtx-split direction="horizontal">
+          <mtx-split-pane>
+            <div class="flex-column mr-small">
+              <div class="flex-row gap-small mb-small mt-small">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  (click)="addSelectedToQueue()"
+                >
+                  Add selected accounts
+                </button>
+
+                <button mat-flat-button color="warn" (click)="sendNext()">
+                  Send Next
+                </button>
+
+                <mat-radio-group [(ngModel)]="sendFromChris">
+                  <mat-radio-button [value]="true">from Chris</mat-radio-button>
+                  <mat-radio-button [value]="false"
+                    >from Admin</mat-radio-button
+                  >
+                </mat-radio-group>
+              </div>
+
+              <mat-form-field subscriptSizing="dynamic" appearance="outline">
+                <mat-label>Text</mat-label>
+                <textarea matInput rows="10" [(ngModel)]="text"></textarea>
+              </mat-form-field>
+            </div>
+          </mtx-split-pane>
+
+          <mtx-split-pane>
+            <div class="flex-column">
+              <table class="common-table">
+                <thead>
+                  <tr>
+                    <th>Processed</th>
+                    <th>Pubkey</th>
+                    <th>Published on Relays</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of queuedItems">
+                    <td>
+                      {{ item.processed }}
+                    </td>
+                    <td>{{ item.user.pubkey }}</td>
+                    <td>
+                      <div class="flex-column font-size-12">
+                        <ng-container
+                          *ngFor="let relay of item.publishedOnRelays"
+                        >
+                          <span>{{ relay }}</span>
+                        </ng-container>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </mtx-split-pane>
+        </mtx-split>
+      </div>
+    </mtx-split-pane>
+  </mtx-split>
+</ng-template>

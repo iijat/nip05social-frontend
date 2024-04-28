@@ -1,0 +1,24 @@
+<a *ngIf="href; else noHref" [href]="href">
+  <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+  <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+</a>
+
+<ng-template #noHref>
+  <ng-container *ngIf="link">
+    <a [routerLink]="link">
+      <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </a>
+  </ng-container>
+
+  <ng-container *ngIf="!link">
+    <a>
+      <mat-icon *ngIf="icon">{{ icon }}</mat-icon>
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </a>
+  </ng-container>
+</ng-template>
+
+<ng-template #contentTemplate>
+  <ng-content></ng-content>
+</ng-template>

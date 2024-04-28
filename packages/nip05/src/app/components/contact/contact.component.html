@@ -1,0 +1,44 @@
+<app-space size="normal"></app-space>
+
+<p>
+  <span class="lead">
+    NIP05.social is a project created by
+    <span class="color-blue font-weight-500">Chris</span> from IIJAT. If you
+    want to get in touch or simply discuss anything around NIP05.social, please
+    contact Chris directly on nostr or via email.
+  </span>
+</p>
+
+<p>
+  <span>
+    <div class="contact-grid">
+      <div>Nostr:</div>
+      <div class="flex-column gap-tiny" style="overflow-x: hidden">
+        <app-chip
+          color="accent"
+          [text]="reducePubkey(chrisPubkey) ?? 'na'"
+          [clipboardText]="chrisPubkey"
+        >
+        </app-chip>
+
+        <app-chip color="accent" [text]="chrisNip05"> </app-chip>
+      </div>
+
+      <div class="mt-normal">Email:</div>
+      <app-chip
+        class="mt-normal"
+        color="accent"
+        text="chris@iijat.com"
+      ></app-chip>
+    </div>
+  </span>
+</p>
+
+<p>
+  <span style="font-size: 12px">
+    <i
+      >Click on the pubkey or the nostr address to copy them to the
+      clipboard.</i
+    >
+  </span>
+</p>

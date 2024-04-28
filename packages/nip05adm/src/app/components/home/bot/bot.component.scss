@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.left-and-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  column-gap: 24px;
+  .left {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+  }
+}

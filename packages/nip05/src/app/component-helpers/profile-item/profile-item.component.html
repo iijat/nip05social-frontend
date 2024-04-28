@@ -1,0 +1,12 @@
+<a class="profile-item" (click)="copyToClipboard()">
+  <ng-container *ngIf="!showCopy2ClipboardText">
+    <i class="material-icons">{{ icon }} </i>
+    <span>{{ text }}</span>
+    <span *ngIf="suffix" class="suffix">{{ suffix }}</span>
+  </ng-container>
+
+  <ng-container *ngIf="showCopy2ClipboardText">
+    <i class="material-icons color-accent-300">content_paste </i>
+    <span class="color-accent-300">copied to clipboard</span>
+  </ng-container>
+</a>

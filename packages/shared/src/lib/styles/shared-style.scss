@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+@import './material.scss';
+@import './dimensions.scss';
+@import './tables.scss';
+@import './flex.scss';
+@import './margin.scss';
+@import './common.scss';
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &.gap-normal {
+    column-gap: $normal;
+  }
+
+  &.gap-small {
+    column-gap: $small;
+  }
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-self-start {
+  align-self: flex-start;
+}
+
+.font-size-28 {
+  font-size: 28px;
+}
+
+.font-size-32 {
+  font-size: 32px;
+}
+
+.form-field-density-2 {
+  @include mat.form-field-density(-2);
+}

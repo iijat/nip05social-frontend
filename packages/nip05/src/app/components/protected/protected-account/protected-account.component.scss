@@ -1,0 +1,103 @@
+:host {
+  overflow-x: hidden;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .danger-zone {
+    font-size: 20px;
+    color: var(--warn-500);
+  }
+
+  .align-self-start {
+    align-self: flex-start;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  ::ng-deep .mat-mdc-form-field-infix {
+    display: flex;
+  }
+
+  .plans {
+    display: flex;
+    flex-direction: row;
+    column-gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 24px;
+  }
+}
+
+.container {
+  max-width: 1024px;
+  width: 100%;
+}
+
+.save-button-content-desktop {
+  width: 80px;
+}
+
+.save-button-content-handset {
+  width: 24px;
+}
+
+.nostr-addresses {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 6px;
+  row-gap: 6px;
+}
+
+.chip {
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.2;
+}
+
+.link {
+  color: var(--blue);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.handset-subscription-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  //grid-template-rows: 32px;
+  //grid-template-rows: ;
+  justify-content: center;
+  //column-gap: 16px;
+
+  .new-line {
+    border-top: 2px solid var(--accent-300);
+    padding-top: 4px;
+    padding-bottom: 4px;
+    //height: 32px;
+
+    &.gray {
+      color: #6b7280;
+    }
+  }
+
+  .line {
+    border-top: 1px solid lightgray;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    &.gray {
+      color: #6b7280;
+    }
+    //height: 32px;
+  }
+
+  .space-above {
+    margin-top: 24px;
+  }
+}
