@@ -38,6 +38,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { ContactComponent } from './components/contact/contact.component';
 import { DirectoryComponent } from './components/directory/directory.component';
@@ -73,6 +74,17 @@ import { PlanBasicComponent } from './component-helpers/plan-basic/plan-basic.co
 import { PlanProComponent } from './component-helpers/plan-pro/plan-pro.component';
 import { PlanAdvancedComponent } from './component-helpers/plan-advanced/plan-advanced.component';
 import { AlbyInvoiceDialogComponent } from './component-dialogs/alby-invoice-dialog/alby-invoice-dialog.component';
+import { Landing2Component } from './components/v2/landing2/landing2.component';
+import { Header2Component } from './component-helpers/v2/header2/header2.component';
+import { Home2Component } from './components/v2/home2/home2.component';
+import { Card2Component } from './component-helpers/v2/card2/card2.component';
+import { Footer2Component } from './component-helpers/v2/footer2/footer2.component';
+import { Stats2Component } from './components/v2/stats2/stats2.component';
+import { Terms2Component } from './components/v2/terms2/terms2.component';
+import { Plans2Component } from './components/v2/plans2/plans2.component';
+import { Button2Component } from './component-helpers/v2/button2/button2.component';
+import { Login2Component } from './components/v2/login2/login2.component';
+import { Input2Component } from './component-helpers/v2/input2/input2.component';
 
 let apiUrl = environment.apiUrl;
 if (!apiUrl) {
@@ -136,6 +148,17 @@ const graphqlCache = new InMemoryCache({
     PlanProComponent,
     PlanAdvancedComponent,
     AlbyInvoiceDialogComponent,
+    Landing2Component,
+    Header2Component,
+    Home2Component,
+    Card2Component,
+    Footer2Component,
+    Stats2Component,
+    Terms2Component,
+    Plans2Component,
+    Button2Component,
+    Login2Component,
+    Input2Component,
   ],
   imports: [
     BrowserModule,
@@ -160,6 +183,7 @@ const graphqlCache = new InMemoryCache({
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
+    MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatProgressBarModule,

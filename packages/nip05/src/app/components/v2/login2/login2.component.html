@@ -1,0 +1,33 @@
+<app-card2>
+  <div class="flex-column align-items-center">
+    <span class="font-size-plus-plus">Login</span>
+    <img
+      class="margin-top"
+      src="assets/icons/nostr.svg"
+      height="60"
+      width="60"
+    />
+
+    <app-button2 class="width-100 margin-top">
+      Login with Nostr (NIP-07)
+    </app-button2>
+
+    <span class="margin-top-2">or</span>
+
+    <app-input2
+      placeholder="Your public key (npub or hex)"
+      class="margin-top-2 width-100"
+    ></app-input2>
+
+    <app-button2 fill="outline" class="margin-top-2 width-100">
+      Login via Nostr DM
+    </app-button2>
+
+    <span style="margin-top: 6px" class="info">
+      We will send you a login code on predefined relays.
+    </span>
+    <span class="info">
+      Manage this relay list <a class="a-link" routerLink="/relays">here</a>.
+    </span>
+  </div>
+</app-card2>

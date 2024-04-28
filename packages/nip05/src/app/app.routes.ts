@@ -13,11 +13,17 @@ import { StatsComponent } from './components/stats/stats.component';
 import { AloginComponent } from './components/alogin/alogin.component';
 import { AregisterComponent } from './components/aregister/aregister.component';
 import { PricingComponent } from './components/pricing/pricing.component';
+import { Landing2Component } from './components/v2/landing2/landing2.component';
+import { Home2Component } from './components/v2/home2/home2.component';
+import { Plans2Component } from './components/v2/plans2/plans2.component';
+import { Stats2Component } from './components/v2/stats2/stats2.component';
+import { Terms2Component } from './components/v2/terms2/terms2.component';
+import { Login2Component } from './components/v2/login2/login2.component';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    component: LandingComponent,
+    component: Landing2Component,
     children: [
       {
         path: '',
@@ -26,58 +32,86 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'home',
-        component: HomeComponent,
+        component: Home2Component,
       },
       {
-        path: 'contact',
-        component: ContactComponent,
-      },
-      {
-        path: 'tos',
-        component: TosComponent,
-      },
-      {
-        path: 'register',
-        component: RegisterComponent,
-      },
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'alogin/:userId/:code',
-        component: AloginComponent,
-      },
-      {
-        path: 'aregister/:userId/:registrationId/:code',
-        component: AregisterComponent,
+        path: 'plans',
+        component: Plans2Component,
       },
       {
         path: 'stats',
-        component: StatsComponent,
+        component: Stats2Component,
       },
       {
-        path: 'directory',
-        component: DirectoryComponent,
+        path: 'terms',
+        component: Terms2Component,
       },
       {
-        path: 'pricing',
-        component: PricingComponent,
-      },
-      {
-        path: 's',
-        component: ProtectedComponent,
-        children: [
-          {
-            path: 'home',
-            component: ProtectedHomeComponent,
-          },
-          {
-            path: 'account',
-            component: ProtectedAccountComponent,
-          },
-        ],
+        path: 'login',
+        component: Login2Component,
       },
     ],
+    // component: LandingComponent,
+    // children: [
+    //   {
+    //     path: '',
+    //     pathMatch: 'full',
+    //     redirectTo: 'home',
+    //   },
+    //   {
+    //     path: 'home',
+    //     component: HomeComponent,
+    //   },
+    //   {
+    //     path: 'contact',
+    //     component: ContactComponent,
+    //   },
+    //   {
+    //     path: 'tos',
+    //     component: TosComponent,
+    //   },
+    //   {
+    //     path: 'register',
+    //     component: RegisterComponent,
+    //   },
+    //   {
+    //     path: 'login',
+    //     component: LoginComponent,
+    //   },
+    //   {
+    //     path: 'alogin/:userId/:code',
+    //     component: AloginComponent,
+    //   },
+    //   {
+    //     path: 'aregister/:userId/:registrationId/:code',
+    //     component: AregisterComponent,
+    //   },
+    //   {
+    //     path: 'stats',
+    //     component: StatsComponent,
+    //   },
+    //   {
+    //     path: 'directory',
+    //     component: DirectoryComponent,
+    //   },
+    //   {
+    //     path: 'pricing',
+    //     component: PricingComponent,
+    //   },
+    //   {
+    //     path: 's',
+    //     component: ProtectedComponent,
+    //     children: [
+    //       {
+    //         path: 'home',
+    //         component: ProtectedHomeComponent,
+    //       },
+    //       {
+    //         path: 'account',
+    //         component: ProtectedAccountComponent,
+    //       },
+    //     ],
+    //   },
+    // ],
   },
 ];

@@ -1,29 +1,41 @@
-$blue: #517199;
+// $blue: #517199;
 
-.color-blue {
-  color: $blue;
+// .color-blue {
+//   color: $blue;
+// }
+
+// .color-black {
+//   color: #000000;
+// }
+
+// .color-accent-300 {
+//   color: var(--accent-300);
+// }
+
+// .color-accent-500 {
+//   color: var(--accent-500);
+// }
+
+// .color-gray-100 {
+//   color: var(--gray-100);
+// }
+
+// .color-warn-400 {
+//   color: var(--warn-400);
+// }
+
+// .color-green {
+//   color: forestgreen;
+// }
+
+.color-primary {
+  color: var(--dark-theme-primary);
 }
 
-.color-black {
-  color: #000000;
+.color-muted {
+  color: var(--dark-theme-muted);
 }
 
-.color-accent-300 {
-  color: var(--accent-300);
-}
-
-.color-accent-500 {
-  color: var(--accent-500);
-}
-
-.color-gray-100 {
-  color: var(--gray-100);
-}
-
-.color-warn-400 {
-  color: var(--warn-400);
-}
-
-.color-green {
-  color: forestgreen;
+.color-1 {
+  color: var(--dark-theme-color-1);
 }

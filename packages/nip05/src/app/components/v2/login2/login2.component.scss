@@ -1,0 +1,16 @@
+:host {
+  padding-top: var(--padding-2);
+
+  .a-link {
+    all: unset;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .info {
+    align-self: center;
+    text-align: center;
+    font-size: var(--font-size-minus-minus);
+    color: var(--dark-theme-muted);
+  }
+}

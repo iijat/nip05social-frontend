@@ -1,0 +1,11 @@
+<button
+  [disabled]="disabled"
+  [class.color-primary]="color === 'primary'"
+  [class.color-secondary]="color === 'secondary'"
+  [class.color-tertiary]="color === 'tertiary'"
+  [class.fill-solid]="fill === 'solid'"
+  [class.fill-clear]="fill === 'clear'"
+  [class.fill-outline]="fill === 'outline'"
+>
+  <ng-content></ng-content>
+</button>

@@ -10,6 +10,7 @@
 .flex-row {
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   &.gap-normal {
     column-gap: $normal;
