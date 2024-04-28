@@ -1,9 +1,9 @@
-name: PRO - Azure Static Web App CI/CD - nip05.social
+name: DEV - Azure Static Web App CI/CD - nip05.social
 
 on:
   push:
     branches: 
-    - main
+    - develop
     paths:
       - 'packages/nip05/**'
       - '!packages/nip05-e2e/**'
