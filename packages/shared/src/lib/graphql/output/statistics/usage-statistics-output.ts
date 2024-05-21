@@ -6,6 +6,7 @@ export type UsageStatisticsOutput = {
   date?: string;
   noOfUsers?: number;
   noOfRegistrations?: number;
+  noOfLookupsTotal: number;
   noOfLookupsYesterday?: number;
   noOfLookupsToday?: number;
 

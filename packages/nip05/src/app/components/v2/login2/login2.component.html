@@ -1,4 +1,4 @@
-<app-card2>
+<app-card2 style="width: 100%">
   <div class="flex-column align-items-center">
     <span class="font-size-plus-plus">Login</span>
     <img
@@ -8,18 +8,28 @@
       width="60"
     />
 
-    <app-button2 class="width-100 margin-top">
+    <app-button2
+      class="width-100 margin-top"
+      (click)="onClickLoginViaExtension()"
+    >
       Login with Nostr (NIP-07)
     </app-button2>
 
     <span class="margin-top-2">or</span>
 
     <app-input2
-      placeholder="Your public key (npub or hex)"
+      placeholder="Your nostr address or public key (npub or hex)"
       class="margin-top-2 width-100"
+      [(model)]="loginCredentials"
+      transform="lowercase"
     ></app-input2>
 
-    <app-button2 fill="outline" class="margin-top-2 width-100">
+    <app-button2
+      fill="outline"
+      class="margin-top-2 width-100"
+      [activity]="ongoingLoginViaDm"
+      (click)="onClickLoginViaDm()"
+    >
       Login via Nostr DM
     </app-button2>
 
@@ -27,7 +37,7 @@
       We will send you a login code on predefined relays.
     </span>
     <span class="info">
-      Manage this relay list <a class="a-link" routerLink="/relays">here</a>.
+      Manage these relays <a class="a-link" routerLink="/relays">here</a>.
     </span>
   </div>
 </app-card2>

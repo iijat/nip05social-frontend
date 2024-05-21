@@ -1,0 +1,23 @@
+<div style="height: 4px; margin-bottom: 18px">
+  @if(nostrActivity) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+</div>
+
+<mat-tab-group>
+  <mat-tab #nostrTab label="Settings">
+    @if(nostrTab.isActive) {
+    <app-secure-account-nostr
+      (activityChange)="onNostrActivityChange($event)"
+    ></app-secure-account-nostr>
+    }
+  </mat-tab>
+
+  <mat-tab #statsTab label="Stats"> todo </mat-tab>
+
+  <mat-tab #planTab label="Subscription">
+    @if(planTab.isActive) {
+    <app-secure-account-plan #plan></app-secure-account-plan>
+    }
+  </mat-tab>
+</mat-tab-group>

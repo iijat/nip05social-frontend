@@ -1,66 +1,30 @@
 <!-- HANDSET -->
-<ng-container *ngIf="responsiveService.isHandset">
-  <div class="h-toast-container">
-    <div class="grid">
-      <div
-        class="toast-item"
-        *ngFor="let event of toastService.toastEvents"
-        (mouseenter)="event.staysOpen = true"
-      >
-        <div
-          class="message"
-          [ngClass]="
-            event.type === 2 ? 'error' : event.type === 1 ? 'warning' : 'info'
-          "
-        >
-          <div class="header">
-            <i class="material-icons-outlined" style="font-size: 4rem"
-              >cancel</i
-            >
-          </div>
-          <div class="body">
-            <div class="title">{{ event.title }}</div>
-            <span class="message">{{ event.message }}</span>
 
-            <app-button
-              *ngIf="event.staysOpen; else closesAutoElement"
-              class="mb-normal"
-              (click)="toastService.close(event)"
-              >Close</app-button
-            >
-            <ng-template #closesAutoElement>
-              <div class="auto-close">closes automatically</div>
-            </ng-template>
-          </div>
+<div class="h-toast-container">
+  <div class="grid">
+    <div
+      class="toast-item"
+      *ngFor="let event of toastService.toastEvents"
+      (mouseenter)="event.staysOpen = true"
+    >
+      <div
+        class="message"
+        [ngClass]="
+          event.type === 2 ? 'error' : event.type === 1 ? 'warning' : 'info'
+        "
+      >
+        <div class="header">
+          <i class="material-icons-outlined" style="font-size: 4rem">cancel</i>
+        </div>
+        <div class="body">
+          <div class="title">{{ event.title }}</div>
+          <span class="message">{{ event.message }}</span>
+
+          <app-button class="margin-bottom" (click)="toastService.close(event)">
+            Close
+          </app-button>
         </div>
       </div>
     </div>
   </div>
-</ng-container>
-
-<!-- NON HANDSET -->
-<ng-container *ngIf="!responsiveService.isHandset">
-  <div class="d-toast-container">
-    <div
-      class="message"
-      *ngFor="let event of toastService.toastEvents"
-      (mouseenter)="event.staysOpen = true"
-      [ngClass]="
-        event.type === 2 ? 'error' : event.type === 1 ? 'warning' : 'info'
-      "
-    >
-      <div class="left">
-        <div *ngIf="event.title" class="title">{{ event.title }}</div>
-        <div>{{ event.message }}</div>
-      </div>
-      <div
-        *ngIf="event.staysOpen"
-        style="margin-top: -10px; margin-right: -10px"
-      >
-        <button mat-icon-button (click)="toastService.close(event)">
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
-    </div>
-  </div>
-</ng-container>
+</div>

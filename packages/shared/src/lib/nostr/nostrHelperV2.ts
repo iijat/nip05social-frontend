@@ -44,7 +44,7 @@ export class NostrHelperV2 {
       // Continue;
     }
 
-    throw new Error('Could not convert the provided string into npub/hex.');
+    throw new Error('The provided string is not a pubkey.');
   }
 
   static pubkey2npub(hex: string): string {

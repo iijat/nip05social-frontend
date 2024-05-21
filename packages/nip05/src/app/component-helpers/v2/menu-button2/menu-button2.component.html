@@ -1,0 +1,17 @@
+<button
+  [class.align-start]="align === 'start'"
+  [class.align-center]="align === 'center'"
+  [class.align-end]="align === 'end'"
+  [class.fill-clear]="fill === 'clear'"
+  [class.fill-solid]="fill === 'solid'"
+  [style.color]="customColor"
+  [style.background]="customBackgroundColor"
+>
+  <mat-icon *ngIf="icon" fontSet="material-symbols-outlined">
+    {{ icon }}
+  </mat-icon>
+  <!-- <span *ngIf="icon" class="material-symbols-outlined"> {{ icon }} </span> -->
+  <div>
+    <ng-content></ng-content>
+  </div>
+</button>

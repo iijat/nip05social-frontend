@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2px;
+
+  .muted-text-1 {
+    font-size: var(--font-size-minus);
+    color: var(--dark-theme-muted);
+    text-align: center;
+  }
+
+  .muted-text-2 {
+    font-size: var(--font-size-minus-minus);
+    color: var(--dark-theme-muted);
+    text-align: center;
+  }
+}

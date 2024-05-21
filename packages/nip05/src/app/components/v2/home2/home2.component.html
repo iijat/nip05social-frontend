@@ -1,25 +1,55 @@
-<span class="title">Nostr Service Provider </span>
+<span class="title">Nostr Service Provider</span>
 
-<!-- <span class="margin-top-2">
-  Register a free <span class="highlight-text">Nostr Address</span> with
-  <span class="highlight-text">Lightning Address Forwarding</span> and the
-  option to Receive and Send Emails on Nostr.
-</span> -->
+<div
+  class="align-self-center flex-row align-items-center column-gap font-size-minus"
+>
+  <span>Identity</span>
+  <span>&#8226;</span>
+  <span>Lightning Payment</span>
+  <span>&#8226;</span>
+  <span>Email</span>
+</div>
 
-<app-card2 class="margin-top-2" border="dashed">
+<div
+  style="margin-top: 4px"
+  class="align-self-center flex-row align-items-center column-gap font-size-minus"
+>
+  <span>Private Relay</span>
+  <span>&#8226;</span>
+  <span>Anonymous</span>
+</div>
+
+<div class="margin-top-2 flex-row" style="justify-content: space-evenly">
+  <app-stat
+    (click)="onClickStat()"
+    style="cursor: pointer"
+    icon="ph-users-three"
+    [value]="(homeStats?.users | number : '1.0-0') ?? '?'"
+    valueFontSize="20px"
+    text="Users"
+    backgroundColor="#50af51"
+  ></app-stat>
+
+  <app-stat
+    (click)="onClickStat()"
+    style="cursor: pointer"
+    icon="ph-cloud-check"
+    [value]="(homeStats?.lookups | number : '1.0-0') ?? '?'"
+    valueFontSize="20px"
+    backgroundColor="orange"
+    text="Lookups"
+  ></app-stat>
+</div>
+
+<app-card2 class="margin-top-2" border="solid">
   <div class="flex-column align-items-center">
     <span class="text">
-      Get a free <span class="highlight-text">Nostr Address</span>
+      Start with a free <span class="nowrap">Nostr Address</span>
     </span>
 
     <span class="muted margin-top margin-bottom">
-      Pick a domain, register your address and use it as
-      <span style="color: white">Nostr Identity</span>, for
-      <span style="color: white">Lightning Payments</span> and for sending and
-      receiving <span style="color: white">Emails</span>.
+      Pick a domain and register your address.
     </span>
-
-    <button class="button">Register</button>
 
     <mat-grid-list cols="2" rowHeight="80px" class="domain-selection-grid">
       <mat-grid-tile>
@@ -82,30 +112,7 @@
         </span>
       </mat-grid-tile>
     </mat-grid-list>
+
+    <button class="button">Register</button>
   </div>
 </app-card2>
-
-<!-- <app-card2 class="margin-top-2" background="transparent">
-  <div class="flex-column align-items-center">
-    <span class="text">
-      One address for <span class="highlight-text"> Identity </span> and
-      <span class="highlight-text nowrap">Lightning Payments</span>
-    </span>
-    <span class="muted margin-top">
-      Enable lightning payments sent to your registered Nostr Address by
-      configuring a forwarding to an existing Lightning Address.
-    </span>
-  </div>
-</app-card2>
-
-<app-card2 class="margin-top-2" background="transparent">
-  <div class="flex-column align-items-center">
-    <span class="text">
-      One address for <span class="highlight-text"> Email </span> (In & OUT)
-    </span>
-    <span class="muted margin-top">
-      Enable lightning payments sent to your registered Nostr Address by
-      configuring a forwarding to an existing Lightning Address.
-    </span>
-  </div>
-</app-card2> -->

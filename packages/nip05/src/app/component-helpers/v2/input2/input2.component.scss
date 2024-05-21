@@ -1,6 +1,10 @@
 :host {
   font-size: var(--font-size-minus);
 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   input {
     all: unset;
     width: inherit;
@@ -14,6 +18,10 @@
     color: var(--dark-theme-primary);
 
     border: 1px solid var(--dark-theme-muted);
+
+    &.show-clear {
+      padding-right: var(--padding-3);
+    }
 
     &:focus {
       border-color: var(--dark-theme-color-primary);

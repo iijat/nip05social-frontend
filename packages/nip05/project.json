@@ -19,7 +19,11 @@
           "packages/nip05/src/favicon.ico",
           "packages/nip05/src/assets"
         ],
-        "styles": ["packages/nip05/src/styles.scss"],
+        "styles": [
+          "packages/nip05/src/styles.scss",
+          "packages/nip05/src/global.scss",
+          "packages/nip05/src/theme/variables.scss"
+        ],
         "scripts": []
       },
       "configurations": {

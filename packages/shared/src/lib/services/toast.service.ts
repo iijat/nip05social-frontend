@@ -26,7 +26,7 @@ export class ToastService {
 
   // #region Private Properties
 
-  #isHandset = false;
+  #isHandset = true;
   #counter = 0;
   #delayInfo = 4000;
   #delayWarning = 5000;

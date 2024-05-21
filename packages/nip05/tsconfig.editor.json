@@ -22,7 +22,8 @@
     "../shared/src/lib/graphql/output/subscription-calc-output.ts",
     "../shared/src/lib/graphql/output/subscription-output.ts",
     "../shared/src/lib/graphql/output/system-domain-output.ts",
-    "../shared/src/lib/graphql/output/system-relay-output.ts"
+    "../shared/src/lib/graphql/output/system-relay-output.ts",
+    "src/open-api/schema.d.ts"
   ],
   "compilerOptions": {
     "types": ["jest", "node"]

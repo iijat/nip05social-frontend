@@ -1,0 +1,32 @@
+<div style="height: 4px">
+  @if(activity) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+</div>
+
+<button style="margin-top: 18px" mat-icon-button (click)="navigateBack()">
+  <mat-icon fontSet="material-symbols-outlined">arrow_back</mat-icon>
+</button>
+
+<app-card2 class="margin-top">
+  <div class="flex-column">
+    <span class="font-size-plus-plus align-self-center">
+      6-digit Login Code
+    </span>
+    <app-pin-input
+      #pinInput
+      [length]="6"
+      class="margin-top-2 margin-bottom"
+      (entered)="onPinEntered($event)"
+    ></app-pin-input>
+  </div>
+</app-card2>
+
+<span class="margin-top-2 margin-bottom muted-text-1">
+  Please enter your 6-digit login code above.<br />We are sending the code via
+  the following relays:
+</span>
+
+<span *ngFor="let relay of loginViaDm?.relays" class="muted-text-2">
+  {{ relay }}
+</span>

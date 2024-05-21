@@ -1,0 +1,11 @@
+<div class="stat-icon">
+  <div class="icon-wrapper" [style.background]="backgroundColor">
+    <i [class]="'ph ' + icon"></i>
+  </div>
+  <span class="value" [style.fontSize]="valueFontSize">
+    {{ value }}
+  </span>
+  @if(text) {
+  <span class="muted-text">{{ text }}</span>
+  }
+</div>

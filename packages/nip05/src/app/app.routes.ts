@@ -19,6 +19,11 @@ import { Plans2Component } from './components/v2/plans2/plans2.component';
 import { Stats2Component } from './components/v2/stats2/stats2.component';
 import { Terms2Component } from './components/v2/terms2/terms2.component';
 import { Login2Component } from './components/v2/login2/login2.component';
+import { RelaysComponent } from './components/v2/relays/relays.component';
+import { LoginViaDmComponent } from './components/v2/login-via-dm/login-via-dm.component';
+import { SecureComponent } from './components/secure/secure.component';
+import { SecureAccountComponent } from './components/secure/secure-account/secure-account.component';
+import { LoginViaExtensionComponent } from './components/v2/login-via-extension/login-via-extension.component';
 
 export const appRoutes: Route[] = [
   {
@@ -49,6 +54,28 @@ export const appRoutes: Route[] = [
       {
         path: 'login',
         component: Login2Component,
+      },
+      {
+        path: 'login-via-dm/:key',
+        component: LoginViaDmComponent,
+      },
+      {
+        path: 'login-via-extension',
+        component: LoginViaExtensionComponent,
+      },
+      {
+        path: 'relays',
+        component: RelaysComponent,
+      },
+      {
+        path: 's',
+        component: SecureComponent,
+        children: [
+          {
+            path: 'account',
+            component: SecureAccountComponent,
+          },
+        ],
       },
     ],
     // component: LandingComponent,

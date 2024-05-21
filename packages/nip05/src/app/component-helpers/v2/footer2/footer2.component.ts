@@ -8,4 +8,11 @@ import { CommonModule } from '@angular/common';
 })
 export class Footer2Component {
   readonly year = new Date().getFullYear();
+
+  onClickALink(event: MouseEvent) {
+    // window.setTimeout(() => {
+    //   (document.activeElement as HTMLElement)?.focus();
+    // }, 100);
+    // (event.target as HTMLElement)?.blur();
+  }
 }

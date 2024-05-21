@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      @for(header of headers; track header.displayName) {
+      <th>{{ header.displayName }}</th>
+      }
+    </tr>
+  </thead>
+
+  <tbody>
+    @for(item of items; track item.id) {
+    <tr>
+      @for(header of headers; track header.displayName) {
+      @if(header.propertyTransform) {
+      <td>{{ header.propertyTransform(item.data) | async }}</td>
+      } @else {
+      <td>{{ item.data[header.propertyName] }}</td>
+      } }
+    </tr>
+    }
+  </tbody>
+</table>

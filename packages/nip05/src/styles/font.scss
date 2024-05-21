@@ -59,3 +59,12 @@
 .font-size-minus-minus {
   font-size: var(--font-size-minus-minus);
 }
+
+.text-align-center {
+  text-align: center;
+}
+
+.link-text {
+  color: var(--dark-theme-primary);
+  cursor: pointer;
+}

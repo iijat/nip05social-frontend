@@ -20,8 +20,24 @@
     font-weight: 500;
     cursor: pointer;
 
-    &:hover {
-      color: #ffffff;
+    &:active {
+      color: inherit;
+    }
+
+    &:visited {
+      color: inherit;
+    }
+  }
+
+  @media (hover: none) {
+    .a-link:hover {
+      color: inherit;
+    }
+  }
+
+  @media (hover: hover) {
+    .a-link:hover {
+      color: #fff;
     }
   }
 

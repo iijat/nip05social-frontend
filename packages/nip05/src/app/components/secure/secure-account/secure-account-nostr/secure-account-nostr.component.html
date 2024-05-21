@@ -1,0 +1,135 @@
+<app-card2>
+  <div class="flex-column">
+    <span class="font-size-plus text-align-center"> Nostr Address</span>
+    <span class="muted-text margin-bottom margin-top">
+      Select your Nostr Address or register a new one
+      <span class="link-text">here</span>.
+    </span>
+    <ion-select
+      label-placement="floating"
+      [interfaceOptions]="{
+        header: 'Select a Nostr Address',
+        translucent: true
+      }"
+      placeholder="Select a Nostr Address"
+      fill="outline"
+      [ngModel]="selectedRegistration"
+      (ngModelChange)="selectedRegistration = $event"
+    >
+      @for (registration of registrations; track registration) {
+      <ion-select-option [value]="registration">
+        {{ registration.nostrAddress }}
+      </ion-select-option>
+      }
+    </ion-select>
+  </div>
+</app-card2>
+
+@if(selectedRegistration) {
+<app-card2 class="margin-top-2">
+  <div class="flex-column">
+    <span class="font-size-plus text-align-center"> Lightning Address </span>
+    <span class="muted-text margin-bottom margin-top">
+      To enable lightning payments with your Nostr Address, configure a
+      forwarding to an existing lightning address (e.g. from Wallet of Satoshi
+      or Alby).
+    </span>
+    <app-input2
+      placeholder="Lightning Address"
+      class="width-100"
+      [model]="selectedRegistration.lightningAddress ?? ''"
+      (valueChange)="onLightningAddressChange($event, selectedRegistration)"
+      transform="lowercase"
+      confirmClear="Do you really want to remove your forwarding?"
+      (escapeEvent)="onLightningAddressEscape($event)"
+    ></app-input2>
+  </div>
+</app-card2>
+
+<app-card2 class="margin-top-2">
+  <div class="flex-column">
+    <span class="font-size-plus text-align-center"> NIP-05 Relays </span>
+    <span class="muted-text margin-bottom margin-top">
+      Configure relays that clients will be notified about when they query your
+      Nostr Address.
+    </span>
+
+    <div class="flex-column row-gap">
+      @for(relay of selectedRegistration.relays; track relay) {
+      <app-input2
+        class="width-100"
+        [model]="relay"
+        (valueChange)="onRelayChange($event, $index)"
+        (escapeEvent)="onRelayEscape($event, $index)"
+        transform="lowercase"
+        placeholder="Relay Address"
+        confirmClear="Do you really want to remove this relay?"
+      ></app-input2>
+      }
+      <app-input2
+        class="width-100"
+        model=""
+        (valueChange)="onNewRelay($event)"
+        (escapeEvent)="$event.value = ''"
+        transform="lowercase"
+        placeholder="wss://..."
+      ></app-input2>
+    </div>
+  </div>
+</app-card2>
+
+<app-card2 class="margin-top-2">
+  <div class="flex-column">
+    <span class="font-size-plus text-align-center"> Email</span>
+    <span class="muted-text margin-bottom margin-top">
+      If you activate EMAIL IN, you can receive emails send to this Nostr
+      Address as direct messages on Nostr.
+      <!-- via our private relay 'relay.nip05.social',
+      every NIP-05 relay configured above and every read-relay on your relay
+      lists (NIP-65) found on your NIP-05 relays. -->
+    </span>
+    <ion-checkbox
+      style="align-self: flex-start"
+      labelPlacement="end"
+      [ngModel]="selectedRegistration.emailIn"
+    >
+      EMAIL IN
+    </ion-checkbox>
+
+    <span class="muted-text margin-bottom margin-top-2">
+      If you activate EMAIL OUT, you can send emails as direct messages directly
+      from Nostr.
+    </span>
+    <ion-checkbox
+      style="align-self: flex-start"
+      labelPlacement="end"
+      [ngModel]="selectedRegistration.emailOut"
+    >
+      EMAIL OUT
+    </ion-checkbox>
+
+    <span class="muted-text margin-bottom margin-top-2">
+      Please note the important information for receiving and sending emails
+      <span class="link-text">here</span>.
+    </span>
+  </div>
+</app-card2>
+
+<app-card2 class="margin-top-2">
+  <div class="flex-column">
+    <span class="font-size-plus text-align-center">
+      Private Relay <span>"relay.nip05.social"</span>
+    </span>
+    <span class="muted-text margin-bottom margin-top">
+      As registered user you have access to our private relay. Please make sure
+      to add it to the relay list of your favorite client. <br />
+      <br />
+      Important:<br />
+      EMAIL OUT will only work if you have relay.nip05.social in your client's
+      relay list.
+    </span>
+  </div>
+</app-card2>
+}
+
+<!-- <div class="margin-top"></div> -->

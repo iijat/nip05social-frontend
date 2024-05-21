@@ -10,4 +10,5 @@ export class Button2Component {
   @Input({ required: false }) fill: 'clear' | 'outline' | 'solid' = 'solid';
   @Input({ required: false }) color: 'primary' | 'secondary' | 'tertiary' =
     'primary';
+  @Input({ required: false }) activity = false;
 }

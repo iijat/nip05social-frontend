@@ -37,8 +37,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 import { ContactComponent } from './components/contact/contact.component';
 import { DirectoryComponent } from './components/directory/directory.component';
@@ -85,6 +87,19 @@ import { Plans2Component } from './components/v2/plans2/plans2.component';
 import { Button2Component } from './component-helpers/v2/button2/button2.component';
 import { Login2Component } from './components/v2/login2/login2.component';
 import { Input2Component } from './component-helpers/v2/input2/input2.component';
+import { MenuButton2Component } from './component-helpers/v2/menu-button2/menu-button2.component';
+import { RelaysComponent } from './components/v2/relays/relays.component';
+import { LoginViaDmComponent } from './components/v2/login-via-dm/login-via-dm.component';
+import { PinInputComponent } from './component-helpers/v2/pin-input/pin-input.component';
+import { SecureComponent } from './components/secure/secure.component';
+import { SecureAccountComponent } from './components/secure/secure-account/secure-account.component';
+import { LoginViaExtensionComponent } from './components/v2/login-via-extension/login-via-extension.component';
+import { TableComponent } from './component-helpers/v2/table/table.component';
+import { DatePipe } from '@angular/common';
+import { StatComponent } from './component-helpers/v2/stat/stat.component';
+import { SecureAccountNostrComponent } from './components/secure/secure-account/secure-account-nostr/secure-account-nostr.component';
+import { SecureAccountPlanComponent } from './components/secure/secure-account/secure-account-plan/secure-account-plan.component';
+import { IonicModule } from '@ionic/angular';
 
 let apiUrl = environment.apiUrl;
 if (!apiUrl) {
@@ -159,10 +174,22 @@ const graphqlCache = new InMemoryCache({
     Button2Component,
     Login2Component,
     Input2Component,
+    MenuButton2Component,
+    RelaysComponent,
+    LoginViaDmComponent,
+    PinInputComponent,
+    SecureComponent,
+    SecureAccountComponent,
+    LoginViaExtensionComponent,
+    TableComponent,
+    StatComponent,
+    SecureAccountNostrComponent,
+    SecureAccountNostrComponent,
+    SecureAccountPlanComponent,
   ],
   imports: [
     BrowserModule,
-
+    IonicModule.forRoot(),
     ApolloModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -189,11 +216,15 @@ const graphqlCache = new InMemoryCache({
     MatProgressBarModule,
     MatRadioModule,
     MatSelectModule,
+    MatTabsModule,
     MatTooltipModule,
+
+    OverlayModule,
 
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [
+    DatePipe,
     {
       provide: APOLLO_OPTIONS,
       useFactory(httpLink: HttpLink, tokenService: TokenService) {

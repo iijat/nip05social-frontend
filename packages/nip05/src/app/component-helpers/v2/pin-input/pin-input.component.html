@@ -1,0 +1,11 @@
+<div class="pin-input">
+  <input
+    *ngFor="let item of items; let i = index"
+    [id]="'input-' + i"
+    type="text"
+    (input)="onInput($event, i)"
+    (focus)="onFocus($event)"
+    (keydown.backspace)="onBackspace($event, i)"
+    maxlength="1"
+  />
+</div>

@@ -8,8 +8,5 @@ import { ToastService } from 'packages/shared/src/lib/services/toast.service';
   styleUrls: ['./toast.component.scss'],
 })
 export class ToastComponent {
-  constructor(
-    public responsiveService: ResponsiveService,
-    public toastService: ToastService
-  ) {}
+  constructor(public toastService: ToastService) {}
 }

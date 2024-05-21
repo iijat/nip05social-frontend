@@ -1,0 +1,18 @@
+<div style="height: 4px">
+  @if(activity) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+</div>
+
+<button style="margin-top: 18px" mat-icon-button (click)="navigateBack()">
+  <mat-icon fontSet="material-symbols-outlined">arrow_back</mat-icon>
+</button>
+
+@if(extensionAvailable) {
+<span>Logging in ...</span>
+} @else {
+<span class="warning-text">
+  Could not find a suitable Browser extension. Please try logging in via Nostr
+  DM.
+</span>
+}

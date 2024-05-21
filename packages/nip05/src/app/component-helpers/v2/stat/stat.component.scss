@@ -1,0 +1,30 @@
+:host {
+  .stat-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .icon-wrapper {
+      height: 64px;
+      width: 64px;
+      border-radius: 100%;
+      //background: red;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    .value {
+      font-size: 2.1rem;
+      font-weight: 600;
+    }
+
+    .muted-text {
+      margin-top: 4px;
+      font-size: 14px;
+      color: var(--dark-theme-muted);
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { LoginViaDmOutput } from '../output/login-via-dm-output';
 import { UserTokenOutput } from '../output/user-token-output';
 
 export type CreateLoginNip07CodeMutationArgs = {
@@ -70,3 +71,48 @@ export interface RedeemLoginCodeMutationArgs {
 export interface RedeemLoginCodeMutationRoot {
   redeemLoginCode: UserTokenOutput;
 }
+
+export interface LoginViaDmMutationArgs {
+  pubkey: string;
+  relays: string[];
+}
+
+export type LoginViaDmMutationRoot = {
+  loginViaDm: LoginViaDmOutput;
+};
+
+export type LoginViaDmRedeemMutationArgs = {
+  userId: string;
+  deviceId: string;
+  code: string;
+};
+
+export type LoginViaDmRedeemMutationRoot = {
+  loginViaDmRedeem: UserTokenOutput;
+};
+
+export type LoginViaExtensionMutationArgs = {
+  pubkey: string;
+  deviceId: string;
+};
+
+export type LoginViaExtensionMutationRoot = {
+  loginViaExtension: string;
+};
+
+export type LoginViaExtensionRedeemMutationArgs = {
+  deviceId: string;
+  data: {
+    id: string;
+    pubkey: string;
+    created_at: number;
+    sig: string;
+    content: string;
+    tags: string[][];
+    kind: number;
+  };
+};
+
+export type LoginViaExtensionRedeemMutationRoot = {
+  loginViaExtensionRedeem: UserTokenOutput;
+};

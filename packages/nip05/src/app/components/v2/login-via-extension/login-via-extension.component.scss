@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2px;
+
+  .warning-text {
+    color: var(--warn-400);
+  }
+}

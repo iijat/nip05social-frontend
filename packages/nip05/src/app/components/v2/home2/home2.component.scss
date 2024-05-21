@@ -10,7 +10,7 @@
 
   .title {
     margin-top: var(--padding-2);
-    font-size: 20px;
+    font-size: 24px;
     align-self: center;
     color: unset;
     font-weight: 500;
@@ -44,6 +44,7 @@
   .domain-selection-grid {
     width: 100%;
     margin-top: var(--padding);
+    margin-bottom: var(--padding);
   }
 
   .domain {
@@ -56,8 +57,7 @@
     justify-content: center;
 
     &.selected {
-      background: var(--dark-theme-tertiary);
-      //color: var(--dark-theme-primary);
+      background: var(--dark-theme-muted);
     }
   }
 
@@ -83,5 +83,26 @@
     height: 40px;
     min-height: 40px;
     box-sizing: border-box;
+  }
+
+  .info-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    column-gap: 8px;
+    height: 30px;
+    background: #150d29;
+    border: 1px solid #150d29;
+    border-radius: 8px;
+    font-weight: 300;
+    font-size: 14px;
+    color: #fff;
+
+    .bold {
+      font-weight: 500;
+    }
   }
 }

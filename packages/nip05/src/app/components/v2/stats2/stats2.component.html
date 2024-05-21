@@ -1,1 +1,95 @@
-<p>stats2 works!</p>
+<div style="height: 4px; margin-bottom: 18px">
+  @if(activity) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+</div>
+
+@if(!activity) {
+
+<div class="flex-row" style="justify-content: space-evenly">
+  <app-stat
+    icon="ph-users-three"
+    [value]="(usageStatistics?.noOfUsers | number : '1.0-0') ?? '?'"
+    backgroundColor="#50af51"
+  ></app-stat>
+
+  <app-stat
+    icon="ph-at"
+    [value]="(usageStatistics?.noOfRegistrations | number : '1.0-0') ?? '?'"
+    backgroundColor="#3197f3"
+  ></app-stat>
+</div>
+
+<div class="margin-top-2 flex-row" style="justify-content: space-evenly">
+  <app-stat
+    icon="ph-cloud-check"
+    [value]="(usageStatistics?.noOfLookupsToday | number : '1.0-0') ?? '?'"
+    valueFontSize="20px"
+    backgroundColor="orange"
+    text="Today"
+  ></app-stat>
+
+  <app-stat
+    icon="ph-cloud-check"
+    [value]="(usageStatistics?.noOfLookupsTotal | number : '1.0-0') ?? '?'"
+    backgroundColor="orange"
+    text="Overall"
+  ></app-stat>
+
+  <app-stat
+    icon="ph-cloud-check"
+    [value]="(usageStatistics?.noOfLookupsYesterday | number : '1.0-0') ?? '?'"
+    valueFontSize="20px"
+    backgroundColor="orange"
+    text="Yesterday"
+  ></app-stat>
+</div>
+
+<app-card2 class="margin-top-2">
+  <div class="flex-column">
+    <span class="card-title">Registrations by Domain</span>
+
+    <div class="margin-top" style="height: 150px">
+      <ngx-charts-bar-horizontal
+        [results]="data"
+        [gradient]="false"
+        [xAxis]="false"
+        [yAxis]="true"
+        [legend]="false"
+        [showXAxisLabel]="false"
+        [showYAxisLabel]="false"
+        [showDataLabel]="true"
+        xAxisLabel="Registrations"
+        yAxisLabel="Domain"
+      >
+      </ngx-charts-bar-horizontal>
+    </div>
+  </div>
+</app-card2>
+
+<app-card2 class="margin-top-2">
+  <div class="flex-column">
+    <span class="card-title">Last 10 Registrations</span>
+
+    <app-table
+      class="margin-top"
+      style="width: 100%"
+      [headers]="lastRegistrationsHeaders"
+      [data]="usageStatistics?.lastRegistrations ?? []"
+    ></app-table>
+  </div>
+</app-card2>
+
+<app-card2 class="margin-top-2">
+  <div class="flex-column">
+    <span class="card-title">Top 10 Lookups Today</span>
+
+    <app-table
+      class="margin-top"
+      style="width: 100%"
+      [headers]="topLookupsHeaders"
+      [data]="usageStatistics?.topLookupsToday ?? []"
+    ></app-table>
+  </div>
+</app-card2>
+}

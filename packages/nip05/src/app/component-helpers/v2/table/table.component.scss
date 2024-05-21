@@ -1,0 +1,29 @@
+:host {
+  table {
+    width: 100%;
+    font-size: 14px;
+
+    th {
+      text-align: left;
+      font-weight: 500;
+      line-height: 32px;
+      background-color: var(--dark-theme-secondary);
+      color: #ffffff;
+      padding-left: 8px;
+    }
+
+    td {
+      background-color: var(--dark-theme-bg-light);
+      padding-left: 8px;
+      line-height: 28px;
+    }
+
+    @media (hover: hover) {
+      tr {
+        &:hover > td {
+          background: var(--dark-theme-border);
+        }
+      }
+    }
+  }
+}

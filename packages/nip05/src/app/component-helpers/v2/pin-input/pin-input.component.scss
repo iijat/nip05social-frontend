@@ -1,0 +1,21 @@
+:host {
+  .pin-input {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+
+    input {
+      all: unset;
+      border-radius: 4px;
+      text-align: center;
+      font-size: var(--font-size-minus);
+      height: 40px;
+      padding-left: var(--padding);
+      padding-right: var(--padding);
+      width: 12px;
+      background: var(--dark-theme-secondary);
+      color: var(--dark-theme-primary);
+    }
+  }
+}

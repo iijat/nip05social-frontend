@@ -1,0 +1,24 @@
+/* Ionic Variables and Theming. */
+/* This is just a placeholder file For more info, please see: */
+/* https://ionicframework.com/docs/theming/basics */
+
+/* To quickly generate your own theme, check out the color generator */
+/* https://ionicframework.com/docs/theming/color-generator */
+
+:root {
+  --ion-background-color: #131d34 !important;
+
+  --ion-color-primary: #abff84;
+  --ion-color-primary-rgb: 171, 255, 132;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #96e074;
+  --ion-color-primary-tint: #b3ff90;
+
+  --ion-color-secondary: #b384ff;
+  --ion-color-secondary-rgb: 179, 132, 255;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #9e74e0;
+  --ion-color-secondary-tint: #bb90ff;
+}

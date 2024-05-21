@@ -17,7 +17,7 @@ class Token {
   }
 
   isValid(): boolean {
-    return Date.now() <= this.validUntil.getDate();
+    return Date.now() <= this.validUntil.getTime();
   }
 }
 

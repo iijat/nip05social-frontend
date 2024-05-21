@@ -105,3 +105,11 @@ export type UpdateRegistrationMutationArgs = {
   registrationId: string;
   data: RegistrationInputUpdate;
 };
+
+export type RegistrationQueryArgs = {
+  id: string;
+};
+
+export type RegistrationQueryRoot = {
+  registration: RegistrationOutput | null;
+};

@@ -37,6 +37,71 @@
 
 <span class="flex-grow-1"></span>
 
-<button mat-icon-button color="primary">
+<button
+  mat-icon-button
+  color="primary"
+  cdkOverlayOrigin
+  #menuTrigger="cdkOverlayOrigin"
+  (click)="evaluateToken(); menuIsOpen = !menuIsOpen"
+>
   <mat-icon>menu</mat-icon>
 </button>
+
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayPush
+  [cdkConnectedOverlayOrigin]="menuTrigger"
+  [cdkConnectedOverlayOpen]="menuIsOpen"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  [cdkConnectedOverlayPositions]="[
+    { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' }
+  ]"
+  cdkConnectedOverlayBackdropClass="unknown-backdrop"
+  (backdropClick)="menuIsOpen = false"
+>
+  <app-card2>
+    <div class="flex-column row-gap" style="min-width: 120px">
+      <app-menu-button2
+        align="start"
+        icon="home"
+        (click)="onMenuButtonClick('home')"
+      >
+        Home
+      </app-menu-button2>
+
+      <app-menu-button2
+        align="start"
+        icon="label"
+        (click)="onMenuButtonClick('plans')"
+      >
+        Plans
+      </app-menu-button2>
+
+      <app-menu-button2
+        align="start"
+        icon="trending_up"
+        (click)="onMenuButtonClick('stats')"
+      >
+        Stats
+      </app-menu-button2>
+
+      @if(tokenIsValid) {
+      <app-menu-button2 fill="solid" (click)="onMenuButtonClick('/s/account')">
+        Account
+      </app-menu-button2>
+      <app-menu-button2
+        fill="solid-custom"
+        customColor="#9ec8b9"
+        customBackgroundColor="#1b4242"
+        (click)="onClickLogout()"
+      >
+        Logout
+      </app-menu-button2>
+      } @else {
+      <app-menu-button2 fill="solid" (click)="onMenuButtonClick('login')">
+        Login
+      </app-menu-button2>
+      }
+    </div>
+  </app-card2>
+</ng-template>

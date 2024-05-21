@@ -1,1 +1,23 @@
-<input type="text" [placeholder]="placeholder" />
+<input
+  [class.show-clear]="showClear"
+  type="text"
+  (input)="onValueChanged($event)"
+  (blur)="onBlur($event)"
+  (keydown.enter)="onKeydownEnter($event)"
+  (keydown.escape)="onKeydownEscape($event)"
+  [value]="model"
+  [placeholder]="placeholder"
+/>
+@if(showClear && model) {
+<i
+  (click)="onClickClear($event)"
+  class="ph ph-x color-muted"
+  style="margin-left: -32px; font-size: 24px"
+></i>
+}
+<!-- <span
+  style="margin-left: -32px"
+  class="material-symbols-outlined fill color-muted"
+>
+  close
+</span> -->

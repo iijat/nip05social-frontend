@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--padding-2);
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  .muted-text {
+    color: var(--dark-theme-muted);
+    //text-align: center;
+    font-size: 14px;
+  }
+}
