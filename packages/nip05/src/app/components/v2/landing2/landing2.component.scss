@@ -14,4 +14,8 @@
     display: flex;
     flex-direction: column;
   }
+
+  ion-content::part(background) {
+    background: inherit;
+  }
 }
