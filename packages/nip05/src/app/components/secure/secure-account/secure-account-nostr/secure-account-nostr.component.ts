@@ -75,7 +75,11 @@ export class SecureAccountNostrComponent implements OnInit {
       lightningAddress: event[0] === '' ? null : event[0],
     };
 
-    await this.#patchRegistration(registration.id, patchObject);
+    const result = await this.#patchRegistration(registration.id, patchObject);
+
+    if (!result) {
+      event[1].value = registration.lightningAddress ?? '';
+    }
   }
 
   onRelayEscape(input: HTMLInputElement, relayIndex: number) {
