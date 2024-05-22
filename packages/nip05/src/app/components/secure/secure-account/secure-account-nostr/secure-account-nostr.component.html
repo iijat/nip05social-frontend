@@ -89,9 +89,11 @@
       lists (NIP-65) found on your NIP-05 relays. -->
     </span>
     <ion-checkbox
+      #emailInCheckbox
       style="align-self: flex-start"
       labelPlacement="end"
       [ngModel]="selectedRegistration.emailIn"
+      (ngModelChange)="onEmailInChange($event, emailInCheckbox)"
     >
       EMAIL IN
     </ion-checkbox>
@@ -104,6 +106,7 @@
       style="align-self: flex-start"
       labelPlacement="end"
       [ngModel]="selectedRegistration.emailOut"
+      (ngModelChange)="onEmailOutChange($event, emailInCheckbox)"
     >
       EMAIL OUT
     </ion-checkbox>

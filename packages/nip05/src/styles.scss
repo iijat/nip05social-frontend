@@ -282,3 +282,18 @@ body {
 ion-content::part(scroll) {
   overscroll-behavior: auto;
 }
+
+ion-select {
+  --background: var(--dark-theme-secondary);
+  --border-color: var(--dark-theme-muted);
+  min-height: 40px;
+}
+
+ion-select::part(text) {
+  color: var(--dark-theme-primary) !important;
+  font-size: 14px;
+}
+
+ion-select::part(icon) {
+  color: var(--dark-theme-muted) !important;
+}

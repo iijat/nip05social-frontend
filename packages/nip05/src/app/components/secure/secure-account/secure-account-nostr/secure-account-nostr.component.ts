@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonCheckbox } from '@ionic/angular';
 import { Apollo, gql } from 'apollo-angular';
 import { OpenApiService } from 'packages/nip05/src/app/services/open-api-service';
 import { SelectionService } from 'packages/nip05/src/app/services/selection-service';
@@ -125,6 +126,53 @@ export class SecureAccountNostrComponent implements OnInit {
     );
 
     event[1].value = '';
+  }
+
+  async onEmailInChange(event: boolean, checkBox: IonCheckbox) {
+    if (!this.selectedRegistration) {
+      return;
+    }
+
+    const patchObject: RegistrationPatchDto = {
+      emailIn: event,
+    };
+
+    const result = await this.#patchRegistration(
+      this.selectedRegistration.id,
+      patchObject
+    );
+
+    if (!result) {
+      // Rollback.
+      checkBox.checked = !event;
+    }
+  }
+
+  async onEmailOutChange(event: boolean, checkBox: IonCheckbox) {
+    if (!this.selectedRegistration) {
+      return;
+    }
+
+    const patchObject: RegistrationPatchDto = {
+      emailOut: event,
+    };
+
+    const result = await this.#patchRegistration(
+      this.selectedRegistration.id,
+      patchObject
+    );
+
+    if (!result) {
+      // Rollback.
+      checkBox.checked = !event;
+    } else {
+      // Manually adjust all other nostr addresses and set emailOut to false.
+      this.registrations
+        .filter((x) => x.id !== this.selectedRegistration?.id)
+        .forEach(async (registration) => {
+          registration.emailOut = false;
+        });
+    }
   }
 
   async #patchRegistration(
