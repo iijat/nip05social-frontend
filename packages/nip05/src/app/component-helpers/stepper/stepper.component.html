@@ -1,0 +1,12 @@
+<div class="flex-row align-self-center">
+  <span>Step {{ selectedStepIndex + 1 }} / {{ steps.length }}</span>
+</div>
+
+<div class="align-self-center">
+  <button (click)="onClickPreviousStep()">Back</button>
+  <button (click)="onClickNextStep()">Next</button>
+</div>
+
+<div class="stepper-content">
+  <ng-content></ng-content>
+</div>

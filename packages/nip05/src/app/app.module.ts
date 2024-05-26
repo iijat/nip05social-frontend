@@ -100,6 +100,9 @@ import { StatComponent } from './component-helpers/v2/stat/stat.component';
 import { SecureAccountNostrComponent } from './components/secure/secure-account/secure-account-nostr/secure-account-nostr.component';
 import { SecureAccountPlanComponent } from './components/secure/secure-account/secure-account-plan/secure-account-plan.component';
 import { IonicModule } from '@ionic/angular';
+import { StepperComponent } from './component-helpers/stepper/stepper.component';
+import { StepComponent } from './component-helpers/stepper/step/step.component';
+import { RegisterOutComponent } from './components/register-out/register-out.component';
 
 let apiUrl = environment.apiUrl;
 if (!apiUrl) {
@@ -186,6 +189,9 @@ const graphqlCache = new InMemoryCache({
     SecureAccountNostrComponent,
     SecureAccountNostrComponent,
     SecureAccountPlanComponent,
+    StepperComponent,
+    StepComponent,
+    RegisterOutComponent,
   ],
   imports: [
     BrowserModule,

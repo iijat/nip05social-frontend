@@ -1,17 +1,17 @@
-<!-- <div class="content"> -->
 <ion-content>
-  <app-header2></app-header2>
+  <div class="content">
+    <app-header2></app-header2>
 
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
-  <div style="padding-left: var(--padding); padding-right: var(--padding)">
-    <router-outlet></router-outlet>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+
+    <div class="flex-grow-1"></div>
+
+    <app-footer2 class="margin-top-2"></app-footer2>
   </div>
-
-  <div class="flex-grow-1"></div>
-
-  <app-footer2 class="margin-top-2"></app-footer2>
 </ion-content>
-<!-- </div> -->

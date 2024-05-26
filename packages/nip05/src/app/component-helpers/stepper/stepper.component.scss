@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .stepper-content {
+    display: flex;
+    width: 100%;
+    overflow-x: hidden;
+  }
+}

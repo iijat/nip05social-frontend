@@ -1,0 +1,32 @@
+<!--------------------------->
+<!-- STEP 1: SELECT DOMAIN -->
+<!--------------------------->
+<ng-template #step1>
+  <span>{{ dataStep1?.domain }}</span>
+</ng-template>
+
+<!------------------------------->
+<!-- STEP 2: SELECT IDENTIFIER -->
+<!------------------------------->
+<ng-template #step2>
+  <app-card2> TODO </app-card2>
+</ng-template>
+
+<!---------------------->
+<!-- STEP 3: REGISTER -->
+<!---------------------->
+<ng-template #step3> STEP 3 </ng-template>
+
+<app-stepper [startWithStep]="startWithStep">
+  <app-step>
+    <ng-container [ngTemplateOutlet]="step1"></ng-container>
+  </app-step>
+
+  <app-step>
+    <ng-container [ngTemplateOutlet]="step2"></ng-container>
+  </app-step>
+
+  <app-step>
+    <ng-container [ngTemplateOutlet]="step3"></ng-container>
+  </app-step>
+</app-stepper>

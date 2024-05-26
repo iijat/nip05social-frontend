@@ -34,6 +34,10 @@ export class Home2Component implements OnInit {
     await this.router.navigateByUrl('/stats');
   }
 
+  onClickRegister() {
+    this.router.navigateByUrl(`/register-out/${this.selectedDomain}`);
+  }
+
   async #loadData() {
     try {
       const result = await firstValueFrom(

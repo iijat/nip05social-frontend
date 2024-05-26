@@ -24,6 +24,7 @@ import { LoginViaDmComponent } from './components/v2/login-via-dm/login-via-dm.c
 import { SecureComponent } from './components/secure/secure.component';
 import { SecureAccountComponent } from './components/secure/secure-account/secure-account.component';
 import { LoginViaExtensionComponent } from './components/v2/login-via-extension/login-via-extension.component';
+import { RegisterOutComponent } from './components/register-out/register-out.component';
 
 export const appRoutes: Route[] = [
   {
@@ -66,6 +67,10 @@ export const appRoutes: Route[] = [
       {
         path: 'relays',
         component: RelaysComponent,
+      },
+      {
+        path: 'register-out/:domain',
+        component: RegisterOutComponent,
       },
       {
         path: 's',

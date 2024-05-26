@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  &.step {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.step-hidden {
+    width: 0;
+    display: none;
+  }
+}
