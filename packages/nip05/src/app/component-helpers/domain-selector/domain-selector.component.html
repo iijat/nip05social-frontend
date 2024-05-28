@@ -1,0 +1,61 @@
+<mat-grid-list cols="2" rowHeight="80px" class="domain-selection-grid">
+  <mat-grid-tile>
+    <span
+      class="domain"
+      [class.selected]="selectedDomain === 'nip05.social'"
+      (click)="selectDomain('nip05.social')"
+    >
+      nip05.social
+    </span>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <span
+      class="domain"
+      [class.selected]="selectedDomain === 'protonostr.com'"
+      (click)="selectDomain('protonostr.com')"
+    >
+      protonostr.com
+    </span>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <span
+      class="domain"
+      [class.selected]="selectedDomain === 'nostrcom.com'"
+      (click)="selectDomain('nostrcom.com')"
+    >
+      nostrcom.com
+    </span>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <span
+      class="domain"
+      [class.selected]="selectedDomain === 'nostrid.info'"
+      (click)="selectDomain('nostrid.info')"
+    >
+      nostrid.info
+    </span>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <span
+      class="domain"
+      [class.selected]="selectedDomain === 'nip05.cloud'"
+      (click)="selectDomain('nip05.cloud')"
+    >
+      nip05.cloud
+    </span>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <span
+      class="domain"
+      [class.selected]="selectedDomain === 'unitednostr.com'"
+      (click)="selectDomain('unitednostr.com')"
+    >
+      unitednostr.com
+    </span>
+  </mat-grid-tile>
+</mat-grid-list>

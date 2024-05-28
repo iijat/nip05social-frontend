@@ -2,14 +2,61 @@
 <!-- STEP 1: SELECT DOMAIN -->
 <!--------------------------->
 <ng-template #step1>
-  <span>{{ dataStep1?.domain }}</span>
+  <app-card2>
+    <div class="flex-column">
+      <span class="font-size-plus text-align-center">
+        Step 1: Pick a Domain
+      </span>
+      <span
+        class="margin-top margin-bottom font-size-minus text-align-center color-muted"
+      >
+        This will become the domain of your Nostr Address.
+      </span>
+
+      <app-domain-selector
+        [selectedDomain]="dataStep1.domain"
+        (selectedDomainChange)="dataStep1.domain = $event"
+      ></app-domain-selector>
+    </div>
+  </app-card2>
 </ng-template>
 
 <!------------------------------->
 <!-- STEP 2: SELECT IDENTIFIER -->
 <!------------------------------->
 <ng-template #step2>
-  <app-card2> TODO </app-card2>
+  <app-card2>
+    <div class="flex-column">
+      <span class="font-size-plus text-align-center">
+        Step 2: Choose an Identifier
+      </span>
+      <span
+        class="margin-top margin-bottom font-size-minus text-align-center color-muted"
+      >
+        {{
+          dataStep2.identifier
+            ? dataStep2.identifier + '@' + dataStep1.domain
+            : '&lt;identifier&gt;@' + dataStep1.domain
+        }}
+      </span>
+
+      <app-input2
+        class="width-100"
+        [(model)]="dataStep2.identifier"
+      ></app-input2>
+
+      <app-button2 class="margin-top" (click)="onClickCheckAvailability()">
+        Check Availability
+      </app-button2>
+
+      <span
+        class="check-result"
+        [class.ok]="dataStep2.isAvailable"
+        [class.not-ok]="!dataStep2.isAvailable"
+        >{{ dataStep2.reason ?? '&nbsp;' }}</span
+      >
+    </div>
+  </app-card2>
 </ng-template>
 
 <!---------------------->

@@ -1,4 +1,21 @@
 :host {
   display: flex;
   flex-direction: column;
+
+  .check-result {
+    margin-top: var(--padding-2);
+    margin-bottom: var(--padding);
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    opacity: 0.5;
+
+    &.ok {
+      color: var(--dark-theme-primary);
+    }
+
+    &.not-ok {
+      color: var(--ion-color-danger-tint);
+    }
+  }
 }

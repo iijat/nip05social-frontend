@@ -103,6 +103,7 @@ import { IonicModule } from '@ionic/angular';
 import { StepperComponent } from './component-helpers/stepper/stepper.component';
 import { StepComponent } from './component-helpers/stepper/step/step.component';
 import { RegisterOutComponent } from './components/register-out/register-out.component';
+import { DomainSelectorComponent } from './component-helpers/domain-selector/domain-selector.component';
 
 let apiUrl = environment.apiUrl;
 if (!apiUrl) {
@@ -192,6 +193,7 @@ const graphqlCache = new InMemoryCache({
     StepperComponent,
     StepComponent,
     RegisterOutComponent,
+    DomainSelectorComponent,
   ],
   imports: [
     BrowserModule,

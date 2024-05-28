@@ -1,21 +1,14 @@
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonCheckbox } from '@ionic/angular';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import { OpenApiService } from 'packages/nip05/src/app/services/open-api-service';
 import { SelectionService } from 'packages/nip05/src/app/services/selection-service';
 import {
   RegistrationDto,
   RegistrationPatchDto,
 } from 'packages/nip05/src/open-api/@types';
-import {
-  UpdateRegistrationMutationArgs,
-  UpdateRegistrationMutationRoot,
-} from 'packages/shared/src/lib/graphql/crud/registration';
-import { FULL_FRAGMENT_REGISTRATION } from 'packages/shared/src/lib/graphql/fragments/full-fragment-registration';
 import { ToastService } from 'packages/shared/src/lib/services/toast.service';
-import { firstValueFrom } from 'rxjs';
-import { CatchError } from 'shared';
 
 const LOCAL_STORAGE_KEY = {
   SETTINGS_SELECTED_NOSTR_ADDRESS: 'settingsSelectedNostrAddress',
@@ -47,7 +40,6 @@ export class SecureAccountNostrComponent implements OnInit {
   #selectedRegistration: RegistrationDto | undefined;
 
   constructor(
-    private apollo: Apollo,
     private router: Router,
     private toastService: ToastService,
     private selectionService: SelectionService,
