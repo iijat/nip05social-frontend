@@ -50,6 +50,10 @@ export class SecureAccountNostrComponent implements OnInit {
     this.#loadData();
   }
 
+  onClickRegister() {
+    this.router.navigateByUrl('/register-out/undefined');
+  }
+
   onLightningAddressEscape(input: HTMLInputElement) {
     input.value = this.selectedRegistration?.lightningAddress ?? '';
   }

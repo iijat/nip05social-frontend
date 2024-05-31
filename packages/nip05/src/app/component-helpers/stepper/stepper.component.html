@@ -3,11 +3,17 @@
 </div>
 
 <div class="align-self-center flex-row column-gap margin-top margin-bottom">
-  <app-button2 (click)="onClickPreviousStep()">
+  <app-button2
+    (click)="onClickPreviousStep()"
+    [disabled]="stepCanPrevious.get(selectedStepIndex) === false"
+  >
     <i class="font-size-plus-plus ph ph-arrow-left"></i>
   </app-button2>
 
-  <app-button2 (click)="onClickNextStep()">
+  <app-button2
+    (click)="onClickNextStep()"
+    [disabled]="stepCanNext.get(selectedStepIndex) === false"
+  >
     <i class="font-size-plus-plus ph ph-arrow-right"></i>
   </app-button2>
 </div>

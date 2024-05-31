@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OpenApiService } from '../../services/open-api-service';
 import { ToastService } from 'packages/shared/src/lib/services/toast.service';
+import { TokenService } from 'packages/shared/src/lib/services/token.service';
 
 type DataStep1 = {
   domain?: string;
@@ -31,13 +32,20 @@ export class RegisterOutComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private openApiService: OpenApiService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    public tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
     this.#paramsSubscription = this.activatedRoute.params.subscribe(
       (params) => {
         const domain = params['domain'];
+
+        if (domain === 'undefined') {
+          // Do nothing, start with step 1.
+          return;
+        }
+
         if (domain) {
           this.dataStep1 = { domain };
           this.startWithStep = 2;

@@ -10,12 +10,17 @@
       <span
         class="margin-top margin-bottom font-size-minus text-align-center color-muted"
       >
-        This will become the domain of your Nostr Address.
+        This will become the <span class="color-tertiary">domain</span> of your
+        Nostr Address.
       </span>
 
       <app-domain-selector
         [selectedDomain]="dataStep1.domain"
-        (selectedDomainChange)="dataStep1.domain = $event"
+        (selectedDomainChange)="
+          dataStep1.domain = $event;
+          dataStep2.isAvailable = undefined;
+          dataStep2.reason = null
+        "
       ></app-domain-selector>
     </div>
   </app-card2>
@@ -30,22 +35,39 @@
       <span class="font-size-plus text-align-center">
         Step 2: Choose an Identifier
       </span>
-      <span
-        class="margin-top margin-bottom font-size-minus text-align-center color-muted"
+
+      <div
+        class="flex-row margin-top margin-bottom font-size-minus align-self-center"
       >
+        <span class="color-tertiary">{{
+          dataStep2.identifier ? dataStep2.identifier : '&lt;identifier&gt;'
+        }}</span>
+        <span class="color-muted">{{ '@' }}</span>
+        <span class="color-muted">{{ dataStep1.domain }}</span>
+      </div>
+
+      <!-- <span class="color-muted">
         {{
           dataStep2.identifier
             ? dataStep2.identifier + '@' + dataStep1.domain
             : '&lt;identifier&gt;@' + dataStep1.domain
         }}
-      </span>
+      </span> -->
 
       <app-input2
         class="width-100"
         [(model)]="dataStep2.identifier"
+        (modelChange)="
+          dataStep2.isAvailable = undefined; dataStep2.reason = null
+        "
+        (keydown.enter)="onClickCheckAvailability()"
       ></app-input2>
 
-      <app-button2 class="margin-top" (click)="onClickCheckAvailability()">
+      <app-button2
+        class="margin-top"
+        [disabled]="!dataStep2.identifier"
+        (click)="onClickCheckAvailability()"
+      >
         Check Availability
       </app-button2>
 
@@ -62,18 +84,52 @@
 <!---------------------->
 <!-- STEP 3: REGISTER -->
 <!---------------------->
-<ng-template #step3> STEP 3 </ng-template>
+<ng-template #step3>
+  <app-card2>
+    <div class="flex-column">
+      <span class="font-size-plus text-align-center">
+        Step 3: Finalize Registration
+      </span>
+      <span
+        class="margin-top margin-bottom font-size-minus text-align-center color-tertiary"
+      >
+        {{
+          dataStep2.identifier
+            ? dataStep2.identifier + '@' + dataStep1.domain
+            : '&lt;identifier&gt;@' + dataStep1.domain
+        }}
+      </span>
+
+      @if(tokenService.token?.isValid) {
+      <app-button2>Register</app-button2>
+      }
+    </div>
+  </app-card2>
+</ng-template>
+
+<!------------------>
+<!-- MAIN CONTENT -->
+<!------------------>
+<div style="height: 4px; margin-bottom: 18px">
+  @if(activity) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+</div>
+
+<span class="font-size-plus text-align-center margin-bottom">
+  Register a new Nostr Address
+</span>
 
 <app-stepper [startWithStep]="startWithStep">
-  <app-step>
+  <app-step [canPrevious]="false" [canNext]="!!dataStep1.domain">
     <ng-container [ngTemplateOutlet]="step1"></ng-container>
   </app-step>
 
-  <app-step>
+  <app-step [canNext]="dataStep2.isAvailable === true">
     <ng-container [ngTemplateOutlet]="step2"></ng-container>
   </app-step>
 
-  <app-step>
+  <app-step [canNext]="false">
     <ng-container [ngTemplateOutlet]="step3"></ng-container>
   </app-step>
 </app-stepper>

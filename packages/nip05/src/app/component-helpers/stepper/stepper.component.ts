@@ -1,29 +1,26 @@
-import {
-  AfterViewInit,
-  Component,
-  ContentChildren,
-  Input,
-  QueryList,
-  TemplateRef,
-  ViewChild,
-  ViewChildren,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { StepComponent } from './step/step.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stepper',
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss',
 })
-export class StepperComponent implements AfterViewInit {
+export class StepperComponent implements OnDestroy {
   @Input({ required: false }) startWithStep = 1;
 
   steps: StepComponent[] = [];
   selectedStepIndex: number = -1;
+  stepCanNext: Map<number, boolean> = new Map();
+  stepCanPrevious: Map<number, boolean> = new Map();
 
-  ngAfterViewInit(): void {
-    // console.log(this.steps2);
+  #canNextSubscriptions: Subscription[] = [];
+  #canPreviousSubscriptions: Subscription[] = [];
+
+  ngOnDestroy(): void {
+    this.#canNextSubscriptions.forEach((x) => x.unsubscribe());
+    this.#canPreviousSubscriptions.forEach((x) => x.unsubscribe());
   }
 
   onClickPreviousStep() {
@@ -46,6 +43,18 @@ export class StepperComponent implements AfterViewInit {
       this.selectedStepIndex = this.startWithStep - 1;
       this.selectStep(this.startWithStep - 1);
     }
+
+    this.stepCanNext.set(this.steps.length - 1, step.canNext);
+    this.stepCanPrevious.set(this.steps.length - 1, step.canPrevious);
+
+    const nextSubscription = step.canNextChanged.subscribe(
+      this.#canNextHasChanged.bind(this)
+    );
+    this.#canNextSubscriptions.push(nextSubscription);
+
+    const previousSubscription = step.canPreviousChanged.subscribe(
+      this.#canPreviousHasChanged.bind(this)
+    );
   }
 
   selectStep(index: number) {
@@ -57,6 +66,20 @@ export class StepperComponent implements AfterViewInit {
       } else {
         this.steps[i].hide();
       }
+    }
+  }
+
+  #canNextHasChanged(value: [id: string, canNext: boolean]) {
+    const index = this.steps.findIndex((x) => x.uuid === value[0]);
+    if (index !== -1) {
+      this.stepCanNext.set(index, value[1]);
+    }
+  }
+
+  #canPreviousHasChanged(value: [id: string, canPrevious: boolean]) {
+    const index = this.steps.findIndex((x) => x.uuid === value[0]);
+    if (index !== -1) {
+      this.stepCanPrevious.set(index, value[1]);
     }
   }
 }

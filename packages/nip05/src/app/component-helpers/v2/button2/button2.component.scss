@@ -2,16 +2,16 @@
   button {
     all: unset;
 
-    cursor: pointer;
+    &:not(.disabled) {
+      cursor: pointer;
+    }
+
     text-align: center;
     width: 100%;
 
     border-width: 1px;
     border-style: solid;
 
-    //border: 1px solid var(--dark-theme-primary);
-    //background: var(--dark-theme-primary);
-    //color: var(--dark-theme-bg);
     border-radius: 4px;
     padding: 4px 8px;
     font-size: 14px;
@@ -67,6 +67,10 @@
         background-color: var(--dark-theme-tertiary);
         color: #ffffff;
       }
+    }
+
+    &.disabled {
+      opacity: 0.5;
     }
   }
 }
